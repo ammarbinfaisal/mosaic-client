@@ -1,4 +1,7 @@
+import LRUCache from "lru-cache";
 import consts from "./consts";
+
+const cache = new LRUCache<string, any>({ max: 100, ttl: 1000 * 60 * 5 });
 
 export const post = async (p: string, data: any) => {
     const token = localStorage.getItem("token");
@@ -13,8 +16,11 @@ export const post = async (p: string, data: any) => {
     return res.json();
 };
 
-
 export const get = async (p: string) => {
+    if (cache.has(p)) {
+        return cache.get(p);
+    }
+
     const token = localStorage.getItem("token");
     const res = await fetch(`${consts.API_URL}/${p}`, {
         method: "GET",
@@ -23,5 +29,11 @@ export const get = async (p: string) => {
             Authorization: `Bearer ${token}`,
         },
     });
-    return { status: res.status, data: await res.json() };
+
+    const status = res.status;
+    const data = await res.json();
+
+    cache.set(p, data);
+
+    return { status, data };
 };

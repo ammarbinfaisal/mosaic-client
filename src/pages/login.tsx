@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { AuthDispatchContext } from "@/context/auth";
 import consts from "@/consts";
 import Head from "next/head";
+import Image from "next/image";
 
 const Login = () => {
     const [username, setUsername] = useState("");
@@ -42,37 +43,48 @@ const Login = () => {
     return (
         <>
             <Head>
-                <title>Mosaic</title>
+                <title>Mosaic Login</title>
             </Head>
-            <div className="flex flex-col items-center justify-center w-full h-screen">
-                <h1 className="text-4xl font-bold">Login</h1>
-                <form
-                    className="flex flex-col items-center justify-center w-full max-w-md mt-8 space-y-4"
-                    onSubmit={handleSubmit}
-                >
-                    <input
-                        className="w-full px-4 py-2 bg-stone-100 rounded-md focus:outline-none focus:ring-2 focus:ring-rose-600"
-                        type="text"
-                        placeholder="Username"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
+            <div className="h-screen w-screen grid grid-row-3 grid-cols-1 bg-light">
+                <div className="flex flex-col items-center justify-center w-full row-span-2">
+                    <Image
+                        src="/logo@2x.png"
+                        width={100}
+                        height={100}
+                        alt="logo"
                     />
-                    <input
-                        className="w-full px-4 py-2 bg-stone-100 rounded-md focus:outline-none focus:ring-2 focus:ring-rose-600"
-                        type="password"
-                        placeholder="Password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-
-                    <button
-                        className="w-full px-4 py-2 text-stone-900 bg-stone-100 rounded-md hover: transition-all focus:outline-none focus:ring-2 focus:ring-rose-600 focus:ring-opacity-50"
-                        type="submit"
+                    <h1 className="text-4xl font-bold">Mosaic</h1>
+                    <form
+                        className="flex flex-col text-white items-center justify-center w-full max-w-md mt-8 space-y-4"
+                        onSubmit={handleSubmit}
                     >
-                        Login
-                    </button>
-                </form>
-                {error && <p className="mt-4 text-red-600">{error}</p>}
+                        <input
+                            className="w-full px-4 py-2 placeholder:text-white bg-brown rounded-md focus:outline-none focus:ring-2 focus:ring-amber-800"
+                            type="text"
+                            placeholder="Username"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                        />
+                        <input
+                            className="w-full px-4 py-2 placeholder:text-white bg-brown rounded-md focus:outline-none focus:ring-2 focus:ring-amber-800"
+                            type="password"
+                            placeholder="Password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+
+                        <button
+                            className="w-full px-4 py-2 bg-dark-brown bg-amber-900 rounded-md hover:bg-amber-900 transition-all"
+                            type="submit"
+                        >
+                            Login
+                        </button>
+                    </form>
+                    {error && <p className="mt-4 text-red-800">{error}</p>}
+                </div>
+                <div className="w-full row-span-1 flex justify-center relative">
+                    <img src="/Bottom Waves.svg" alt="bottom waves" className="absolute bottom-0" />
+                </div>
             </div>
         </>
     );

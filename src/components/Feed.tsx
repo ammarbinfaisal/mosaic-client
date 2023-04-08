@@ -21,22 +21,33 @@ const fetchPostIds = async () => {
 
 const Feed = () => {
     const [postIds, setPostIds] = useState<number[]>([]);
-    const feedFetchRef = React.useRef(-1);
 
-    useEffect(() => {
-        const d = new Date().getTime();
-        if (d - feedFetchRef.current < 1000 * 60) {
-            return;
-        }
+    const updatePostIds = () => {
         fetchPostIds().then((postIds) => {
             setPostIds(postIds);
-            feedFetchRef.current = new Date().getTime();
         });
+    };
+
+    useEffect(() => {
+        console.log("postIds", postIds);
+    }, [postIds]);
+
+    useEffect(() => {
+        updatePostIds();
+        const i = setInterval(updatePostIds, 10000);
+
+        return () => {
+            clearInterval(i);
+        }
     }, []);
 
-    return <div className="feed">{
-        postIds.map((postId) => <PostFeed key={postId} postId={postId} />)
-    }</div>;
+    return (
+        <div className="feed">
+            {postIds.map((postId) => (
+                <PostFeed key={postId} postId={postId} />
+            ))}
+        </div>
+    );
 };
 
 export default Feed;

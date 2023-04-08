@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import useAuth from "@/hooks/useAuth";
 import { useRouter } from "next/router";
-import dynamic from "next/dynamic";
 import LeftBox from "@/components/LeftBox";
 import Feed from "@/components/Feed";
 import Head from "next/head";
