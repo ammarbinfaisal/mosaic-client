@@ -83,7 +83,7 @@ const Login = () => {
                     {error && <p className="mt-4 text-red-800">{error}</p>}
                 </div>
                 <div className="w-full row-span-1 flex justify-center relative">
-                    <img src="/Bottom Waves.svg" alt="bottom waves" className="absolute bottom-0" />
+                    <img src="/Bottom Waves.svg" alt="bottom waves" className="absolute bottom-0 scale-125" />
                 </div>
             </div>
         </>
