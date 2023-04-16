@@ -1,56 +1,53 @@
-import React, { useState, useContext, useEffect } from "react";
+import { useMemo, useState } from "react";
 import { useRouter } from "next/router";
 import consts from "@/consts";
 import Head from "next/head";
 import Image from "next/image";
-import useAuth from "@/hooks/useAuth";
+import { identicon } from "minidenticons";
 
-const Login = () => {
+const Register = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
-    const {isLoggedIn} = useAuth();
     const router = useRouter();
+
+    const svgURI = useMemo(
+        () =>
+            "data:image/svg+xml;utf8," +
+            encodeURIComponent(identicon(username)),
+        [username]
+    );
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
-            const response = await fetch(`${consts.API_URL}/u/login`, {
+            const response = await fetch(`${consts.API_URL}/u/create`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ username, password }),
+                body: JSON.stringify({
+                    username,
+                    password,
+                    display_pic: svgURI,
+                }),
             });
             if (!response.ok) {
-                setError("wrong username or password");
+                const error = await response.json();
+                setError(error.error);
                 setUsername("");
                 setPassword("");
                 return;
             }
-            const token = await response.text();
-            localStorage.setItem("token", token);
-            localStorage.setItem("username", username);
-            router.push("/");
-        } catch (error) {
-            console.log(error);
+            router.push("/login");
+        } catch (error : any) {
+            setError(error.error);
         }
     };
-
-    useEffect(() => {
-        if (isLoggedIn) {
-            router.push("/");
-        }
-    }, [isLoggedIn, router]);
-
-    if (isLoggedIn) {
-        return <div>Redirecting...</div>;
-    }
-
     return (
         <>
             <Head>
-                <title>Mosaic Login</title>
+                <title>Mosaic Register</title>
             </Head>
             <div className="h-screen w-screen grid grid-row-3 grid-cols-1 bg-light">
                 <div className="flex flex-col items-center justify-center w-full row-span-2">
@@ -65,6 +62,12 @@ const Login = () => {
                         className="flex flex-col items-center justify-center w-full max-w-md mt-8 space-y-4"
                         onSubmit={handleSubmit}
                     >
+                        <Image
+                            src={svgURI}
+                            width={100}
+                            height={100}
+                            alt="logo"
+                        />
                         <input
                             className="w-full px-4 py-2 placeholder:text-amber-900 bg-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-800"
                             type="text"
@@ -86,10 +89,9 @@ const Login = () => {
                             className="w-full px-4 py-2 bg-gray-100 rounded-md hover:bg-amber-900 hover:text-gray-100 transition-all"
                             type="submit"
                         >
-                            Login
+                            Register
                         </button>
                     </form>
-                    {error && <p className="mt-4 text-red-800">{error}</p>}
                 </div>
                 <div className="w-full row-span-1 flex justify-center relative">
                     <img
@@ -103,4 +105,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default Register;

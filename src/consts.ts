@@ -1,6 +1,5 @@
 const consts = {
-    API_URL:
-        "https://amongst-reservations-equally-order.trycloudflare.com/api/v3",
+    API_URL: "http://localhost:5000",
 };
 
 export default consts;

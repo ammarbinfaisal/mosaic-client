@@ -18,14 +18,15 @@ const Search = () => {
         searchQuery();
     };
 
-    return (
-        <input
-            type="text"
-            value={search}
-            onChange={onChange}
-            className=" text-gray-700 placeholder-gray-400 rounded-full w-full pr-4 py-2 mx-24 focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent border-2 border-stone-400 text-lg bg-stone-300"
-        />
-    );
+    // return (
+    //     <input
+    //         type="text"
+    //         value={search}
+    //         onChange={onChange}
+    //         className="mx-auto w-3/4 text-gray-700 placeholder-gray-400 rounded-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent border-2 border-stone-400 text-lg bg-stone-300"
+    //     />
+    // );
+    return null;
 };
 
 export default Search;
