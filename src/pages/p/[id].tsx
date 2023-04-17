@@ -84,7 +84,7 @@ const Post = ({ post, user, community, comments }: PostProps) => {
                 <div className="my-4 p-4 bg-gray-100 rounded w-full flex-col">
                     <Link
                         className="text-gray-500 font-bold text-inherit flex items-center"
-                        href={`u/${user?.id}`}
+                        href={`/u/${user?.username}`}
                     >
                         <Image
                             src={
