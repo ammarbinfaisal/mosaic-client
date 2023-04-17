@@ -7,7 +7,7 @@ interface IAuthProps {
 }
 
 const Auth = (props: IAuthProps) => {
-    const { isLoggedIn } = useAuth();
+    const { isLoggedIn, isLoading, error } = useAuth();
     const [isMounted, setIsMounted] = useState(false);
 
     useEffect(() => {
@@ -19,30 +19,38 @@ const Auth = (props: IAuthProps) => {
     }
 
     if (isLoggedIn) {
+        return <>{props.children}</>;
+    }
+
+    if (error) {
         return (
             <div className="flex flex-col items-center justify-center h-screen">
                 <h1 className="text-3xl font-bold">
-                    loading...
+                    You seem to be offline :/
                 </h1>
             </div>
         );
     }
 
-    if (!isLoggedIn) {
+    if (isLoading) {
         return (
             <div className="flex flex-col items-center justify-center h-screen">
-                <h1 className="text-3xl font-bold">
-                    You must be logged in to view this page.
-                </h1>
-                <div className="flex flex-row space-x-4 font-semibold text-2xl my-4">
-                    <Link href="/login">Login</Link>
-                    <Link href="/register">Register</Link>
-                </div>
+                <h1 className="text-3xl font-bold">loading...</h1>
             </div>
         );
     }
 
-    return <>{props.children}</>;
+    return (
+        <div className="flex flex-col items-center justify-center h-screen">
+            <h1 className="text-3xl font-bold">
+                You must be logged in to view this page.
+            </h1>
+            <div className="flex flex-row space-x-4 font-semibold text-2xl my-4">
+                <Link href="/login">Login</Link>
+                <Link href="/register">Register</Link>
+            </div>
+        </div>
+    );
 };
 
 export default Auth;
