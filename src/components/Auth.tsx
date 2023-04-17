@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import Link from "next/link";
 import useAuth from "@/hooks/useAuth";
+import { useRouter } from "next/router";
 
 interface IAuthProps {
     children: React.ReactNode;
@@ -9,10 +9,19 @@ interface IAuthProps {
 const Auth = (props: IAuthProps) => {
     const { isLoggedIn, isLoading, error } = useAuth();
     const [isMounted, setIsMounted] = useState(false);
+    const router = useRouter();
 
     useEffect(() => {
         setIsMounted(true);
     }, []);
+
+    useEffect(() => {
+        setTimeout(() => {
+            if (isLoggedIn && !isLoading) {
+                router.push("/login");
+            }
+        }, 500);
+    }, [isLoggedIn, isLoading, router]);
 
     if (!isMounted) {
         return null;
@@ -42,13 +51,7 @@ const Auth = (props: IAuthProps) => {
 
     return (
         <div className="flex flex-col items-center justify-center h-screen">
-            <h1 className="text-3xl font-bold">
-                You must be logged in to view this page.
-            </h1>
-            <div className="flex flex-row space-x-4 font-semibold text-2xl my-4">
-                <Link href="/login">Login</Link>
-                <Link href="/register">Register</Link>
-            </div>
+            <h1 className="text-3xl font-bold">Redirecting to login page...</h1>
         </div>
     );
 };
