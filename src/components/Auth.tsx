@@ -18,6 +18,16 @@ const Auth = (props: IAuthProps) => {
         return null;
     }
 
+    if (isLoggedIn) {
+        return (
+            <div className="flex flex-col items-center justify-center h-screen">
+                <h1 className="text-3xl font-bold">
+                    loading...
+                </h1>
+            </div>
+        );
+    }
+
     if (!isLoggedIn) {
         return (
             <div className="flex flex-col items-center justify-center h-screen">
@@ -25,8 +35,8 @@ const Auth = (props: IAuthProps) => {
                     You must be logged in to view this page.
                 </h1>
                 <div className="flex flex-row space-x-4 font-semibold text-2xl my-4">
-                <Link href="/login">Login</Link>
-                <Link href="/register">Register</Link>
+                    <Link href="/login">Login</Link>
+                    <Link href="/register">Register</Link>
                 </div>
             </div>
         );

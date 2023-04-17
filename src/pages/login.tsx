@@ -9,7 +9,6 @@ const Login = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
-    const {isLoggedIn} = useAuth();
     const router = useRouter();
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -36,16 +35,6 @@ const Login = () => {
             console.log(error);
         }
     };
-
-    useEffect(() => {
-        if (isLoggedIn) {
-            router.push("/");
-        }
-    }, [isLoggedIn, router]);
-
-    if (isLoggedIn) {
-        return <div>Redirecting...</div>;
-    }
 
     return (
         <>
