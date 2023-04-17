@@ -7,17 +7,12 @@ import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
 import consts from "@/consts";
 import Link from "next/link";
 import Main from "@/components/Main";
-import dynamic from "next/dynamic";
 import ago from "@/utils/ago";
 import Head from "next/head";
 import Image from "next/image";
 import sanitize from "@/utils/sanitize";
-
-const CommentBox = dynamic(() => import("@/components/CommentBox"), {
-    ssr: false,
-});
-
-const Comment = dynamic(() => import("@/components/Comment"));
+import CommentBox from "@/components/CommentBox";
+import Comment from "@/components/Comment";
 
 interface PostProps {
     post: any;
@@ -27,13 +22,16 @@ interface PostProps {
 }
 
 const Post = ({ post, user, community, comments }: PostProps) => {
-    const { data: voteData } = useSWR(
+    const [poststate, setPostState] = useState(post);
+    const { data, mutate } = useSWR(
         () => (post?.id ? `p/${post.id}/vote` : null),
-        fetcher()
+        fetcher(500)
     );
-    const { data: postt, mutate } = useSWR(() => `p/${post.id}`, fetcher());
-    // 0 = no vote, 1 = upvote, -1 = downvote
-    const [vote, setVote] = useState<any>(voteData ? voteData.vote : 0);
+    const { data: postf, mutate: mutatePost } = useSWR(
+        () => (post?.id ? `p/${post.id}` : null),
+        fetcher(500)
+    );
+    const { vote } = data || {};
     const [mounted, setMounted] = useState(false);
     const title = `${post.title} - ${community.name}`;
 
@@ -42,13 +40,8 @@ const Post = ({ post, user, community, comments }: PostProps) => {
     const upvote = async () => {
         try {
             await p(`p/${post.id}/upvote`, {});
-            if (vote === 1) {
-                setVote(0);
-                mutate();
-            } else {
-                setVote(1);
-                mutate();
-            }
+            await mutate();
+            await mutatePost();
         } catch (e) {
             console.log(e);
         }
@@ -57,21 +50,16 @@ const Post = ({ post, user, community, comments }: PostProps) => {
     const downvote = async () => {
         try {
             await p(`p/${post.id}/downvote`, {});
-            if (vote === -1) {
-                setVote(0);
-                mutate();
-            } else {
-                setVote(-1);
-                mutate();
-            }
+            await mutate();
+            await mutatePost();
         } catch (e) {
             console.log(e);
         }
     };
 
     useEffect(() => {
-        if (voteData) setVote(voteData.vote);
-    }, [voteData]);
+        if (postf) setPostState(postf);
+    }, [postf]);
 
     useEffect(() => {
         setMounted(true);
@@ -122,7 +110,7 @@ const Post = ({ post, user, community, comments }: PostProps) => {
                                     />
                                 </span>
                                 <span className="text-2xl font-bold text-gray-500">
-                                    {post.upvotes - post.downvotes}
+                                    {poststate.upvotes - poststate.downvotes}
                                 </span>
                                 <span
                                     className="cursor-pointer group"
@@ -140,13 +128,13 @@ const Post = ({ post, user, community, comments }: PostProps) => {
                         </div>
                         <div className="w-full">
                             <h1 className="text-3xl font-bold my-4">
-                                {post.title}
+                                {poststate.title}
                             </h1>
                             <p
                                 className="bg-gray-200 p-4 my-2 w-full rounded break-words"
                                 dangerouslySetInnerHTML={{
                                     __html: mounted
-                                        ? sanitize(post.content)
+                                        ? sanitize(poststate.content)
                                         : "",
                                 }}
                             />
