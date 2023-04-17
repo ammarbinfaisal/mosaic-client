@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import useAuth from "@/hooks/useAuth";
 import { useRouter } from "next/router";
+import { FetchError } from "@/hooks/useApi";
 
 interface IAuthProps {
     children: React.ReactNode;
@@ -17,11 +18,14 @@ const Auth = (props: IAuthProps) => {
 
     useEffect(() => {
         setTimeout(() => {
-            if (isLoggedIn && !isLoading) {
+            if (
+                (!isLoggedIn && !isLoading) ||
+                (error && error instanceof FetchError)
+            ) {
                 router.push("/login");
             }
         }, 500);
-    }, [isLoggedIn, isLoading, router]);
+    }, [isLoggedIn, isLoading, router, error]);
 
     if (!isMounted) {
         return null;
@@ -31,7 +35,7 @@ const Auth = (props: IAuthProps) => {
         return <>{props.children}</>;
     }
 
-    if (error) {
+    if (error && error instanceof TypeError) {
         return (
             <div className="flex flex-col items-center justify-center h-screen">
                 <h1 className="text-3xl font-bold">

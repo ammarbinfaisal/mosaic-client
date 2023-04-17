@@ -72,6 +72,18 @@ export const useGet = () => {
     return get;
 };
 
+export class FetchError extends Error {
+    info: any;
+    status: number;
+
+    constructor(message: string, info: any, status: number) {
+        super(message);
+        this.info = info;
+        this.status = status;
+    }
+
+}
+
 export const fetcher =
     (ttl = 1000 * 5) =>
     async (p: string) => {
@@ -92,7 +104,16 @@ export const fetcher =
 
         const data = await res.json();
 
-        cache.set(p, data, {ttl});
+        if (!res.ok) {
+            const error = new FetchError(
+                `An error occurred while fetching ${p}`,
+                data,
+                res.status
+            );
+            throw error;
+        }
+
+        cache.set(p, data, { ttl });
 
         return data;
     };
