@@ -31,6 +31,11 @@ const Post = ({ post, user, community, comments }: PostProps) => {
         () => (post?.id ? `p/${post.id}` : null),
         fetcher(500)
     );
+    const { data: commentsf } = useSWR(
+        () => (post?.id ? `p/${post.id}/comments` : null),
+        fetcher()
+    );
+    const [commentss, setCommentsS] = useState(comments || []);
     const { vote } = data || {};
     const [mounted, setMounted] = useState(false);
     const title = `${post.title} - ${community.name}`;
@@ -60,6 +65,10 @@ const Post = ({ post, user, community, comments }: PostProps) => {
     useEffect(() => {
         if (postf) setPostState(postf);
     }, [postf]);
+
+    useEffect(() => {
+        if (commentsf) setCommentsS(commentsf);
+    }, [commentsf]);
 
     useEffect(() => {
         setMounted(true);
@@ -141,7 +150,7 @@ const Post = ({ post, user, community, comments }: PostProps) => {
                         </div>
                     </div>
                     <CommentBox post_id={post.id} />
-                    {comments.map((comment) => (
+                    {commentss.map((comment) => (
                         <Comment key={comment.id} comment={comment} />
                     ))}
                 </div>
