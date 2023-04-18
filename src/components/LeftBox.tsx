@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 const LeftBox = () => {
     return (
@@ -60,10 +61,13 @@ const LeftBox = () => {
             </div>
             {/* new post button */}
             <div className="w-full h-full flex flex-col items-center justify-center">
-                <button className="bg-stone-900 text-white font-bold py-2 px-4 rounded">
+                <Link
+                    href="/p/create"
+                    className="bg-stone-900 text-white font-bold py-2 px-4 rounded"
+                >
                     new post
-                </button>
-                </div>
+                </Link>
+            </div>
         </div>
     );
 };
