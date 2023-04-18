@@ -2,13 +2,13 @@ import Main from "@/components/Main";
 import PostFeed from "@/components/PostFeed";
 import consts from "@/consts";
 import Image from "next/image";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import Head from "next/head";
 import CommentParent from "@/components/CommentParent";
+import dp from "@/utils/dp";
 
 const User = ({ user, posts, comments }: any) => {
     const [showPosts, setShowPosts] = useState(true);
-
     return (
         <div>
             <Head>
@@ -17,11 +17,7 @@ const User = ({ user, posts, comments }: any) => {
             <Main>
                 <div className="flex flex-col items-center justify-center">
                     <Image
-                        src={
-                            user.display_pic
-                                ? user.display_pic
-                                : "/usr_profile_pic.svg"
-                        }
+                        src={dp(user.display_pic)}
                         width={200}
                         height={200}
                         alt="dp"
@@ -41,7 +37,9 @@ const User = ({ user, posts, comments }: any) => {
                     </span>
                     <span
                         className={`px-2 py-1 ${
-                            !showPosts ? "bg-gray-200 rounded text-gray-800" : ""
+                            !showPosts
+                                ? "bg-gray-200 rounded text-gray-800"
+                                : ""
                         }`}
                         onClick={() => setShowPosts(false)}
                     >
@@ -65,7 +63,11 @@ const User = ({ user, posts, comments }: any) => {
                 >
                     <h1 className="text-2xl font-bold">Comments</h1>
                     {comments.map((comment: any) => (
-                        <CommentParent key={comment.id} comment={comment} parent />
+                        <CommentParent
+                            key={comment.id}
+                            comment={comment}
+                            parent
+                        />
                     ))}
                 </div>
             </Main>
@@ -84,7 +86,9 @@ export const getServerSideProps = async (ctx: any) => {
         };
     }
 
-    const user = await res.json();
+    let user = await res.json();
+
+    user.display_pic = dp(user.display_pic);
 
     const postsres = await fetch(`${consts.API_URL}/u/${user.id}/posts/0`);
 

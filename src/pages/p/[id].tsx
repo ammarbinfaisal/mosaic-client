@@ -13,6 +13,7 @@ import Image from "next/image";
 import sanitize from "@/utils/sanitize";
 import CommentBox from "@/components/CommentBox";
 import Comment from "@/components/Comment";
+import dp from "@/utils/dp";
 
 interface PostProps {
     post: any;
@@ -87,11 +88,7 @@ const Post = ({ post, user, community, comments }: PostProps) => {
                         href={`/u/${user?.username}`}
                     >
                         <Image
-                            src={
-                                user?.display_pic
-                                    ? user?.display_pic
-                                    : "/usr_profile_pic.svg"
-                            }
+                            src={dp(user?.display_pic)}
                             alt="dp"
                             width={32}
                             height={32}
@@ -166,8 +163,10 @@ export const getServerSideProps = async (ctx: any) => {
     if (!postjson) return { notFound: true };
 
     const user = await fetch(`${consts.API_URL}/u/${postjson.user}`);
-    const userjson = await user.json();
+    let userjson = await user.json();
     if (!userjson) return { notFound: true };
+
+    userjson.display_pic = dp(userjson.display_pic);
 
     const community = await fetch(
         `${consts.API_URL}/c/info/${postjson.community}`

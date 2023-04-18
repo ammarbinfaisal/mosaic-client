@@ -2,6 +2,8 @@ import Image from "next/image";
 import Search from "./Search";
 import useAuth from "@/hooks/useAuth";
 import { useRouter } from "next/router";
+import Link from "next/link";
+import dp from "@/utils/dp";
 
 interface INavbarProps {
     search?: boolean;
@@ -32,19 +34,19 @@ const Navbar = (props: INavbarProps) => {
                     </span>
                 </div>
                 <div className="self-end flex justify-center items-center">
-                    <a
-                        href="#"
-                        className="inline-block text-sm px-4 py-2 leading-none text-stone-900 hover:text-gray-800"
+                    <Link
+                        href="/u/me"
+                        className="flex justify-center items-center text-sm px-4 py-2 leading-none text-stone-900 hover:text-gray-800"
                     >
                         <Image
-                            src={auth.user?.display_pic || "/usr_profile_pic.svg"}
-                            width={20}
-                            height={20}
+                            src={dp(auth.user?.display_pic)}
+                            width={32}
+                            height={32}
                             alt="profile"
-                            className="inline mr-4"
+                            className="inline mr-2"
                         />
                         <span className="inline">Profile</span>
-                    </a>
+                    </Link>
                     <button
                         className="inline-block text-sm px-4 py-2 leading-none border rounded text-stone-900 border-stone-400 hover:border-transparent hover:text-gray-900 hover:bg-stone-400"
                         onClick={logout}

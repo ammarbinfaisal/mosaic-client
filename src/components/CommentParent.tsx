@@ -5,6 +5,7 @@ import Image from "next/image";
 import Comment from "./Comment";
 import sanitize from "@/utils/sanitize";
 import Link from "next/link";
+import dp from "@/utils/dp";
 
 const CommentParent = ({ comment }: any) => {
     const { data: user } = useSWR(
@@ -26,7 +27,6 @@ const CommentParent = ({ comment }: any) => {
         fetcher(1000 * 60 * 5)
     );
     const [mounted, setMounted] = useState(false);
-    console.log(postuser);
 
     useEffect(() => {
         setMounted(true);
@@ -68,7 +68,7 @@ const CommentParent = ({ comment }: any) => {
                     <div className="flex flex-row w-full items-center">
                         <Image
                             className="inline"
-                            src={user?.display_pic || "/usr_profile_pic.svg"}
+                            src={dp(user?.display_pic)}
                             width={40}
                             height={40}
                             alt="dp"
