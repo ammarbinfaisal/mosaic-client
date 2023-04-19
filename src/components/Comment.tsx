@@ -7,6 +7,7 @@ import useSWR from "swr";
 import Image from "next/image";
 import dynamic from "next/dynamic";
 import sanitize from "@/utils/sanitize";
+import dp from "@/utils/dp";
 
 const CommentBox = dynamic(() => import("@/components/CommentBox"), {
     ssr: false,
@@ -61,19 +62,24 @@ const Comment = ({ comment }: any) => {
 
     return (
         <div className="flex flex-col w-full bg-grap-200">
-            <div className="flex flex-row w-full items-center" onClick={toggleComment}>
+            <div
+                className="flex flex-row w-full items-center"
+                onClick={toggleComment}
+            >
                 <Image
-                    className="inline"
-                    src={user?.display_pic || "/usr_profile_pic.svg"}
+                    className="inline object-cover rounded-full mt-2 mr-4"
+                    src={dp(user?.display_pic)}
                     width={40}
                     height={40}
                     alt="dp"
                 />
                 <h2 className="text-lg font-bold">{user?.username}</h2>
             </div>
-            <div className={`flex flex-col w-auto ml-5 mt-1 pl-2 border-l-2 border-gray-500 ${
-                expanded ? "" : "hidden"
-            }`}>
+            <div
+                className={`flex flex-col w-auto ml-5 mt-1 pl-2 border-l-2 border-gray-500 ${
+                    expanded ? "" : "hidden"
+                }`}
+            >
                 <div className="flex flex-row">
                     <div className="w-11/12">
                         <div className="flex flex-row w-full">
