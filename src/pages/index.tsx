@@ -13,7 +13,7 @@ export default function Home() {
             </Head>
             <Auth>
                 <Main>
-                    <Navbar />
+                    <Navbar search />
                     <div className="flex flex-row flex-grow w-full">
                         <div className="flex flex-col items-center justify-center h-full mx-8 my-12">
                             <LeftBox />

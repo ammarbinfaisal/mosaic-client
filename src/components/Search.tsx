@@ -11,12 +11,14 @@ const Search = () => {
             setResults({});
             return;
         }
-        fetch(`${consts.API_URL}/search?q=${search}`).then(async (response) => {
-            const data = await response.json();
-            setResults(data);
-        }).catch((err) => {
-            console.log(err);
-        });
+        fetch(`${consts.API_URL}/search?q=${search}`)
+            .then(async (response) => {
+                const data = await response.json();
+                setResults(data);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
     }, [search]);
 
     const onChange = (e: any) => {
@@ -31,9 +33,9 @@ const Search = () => {
                 onChange={onChange}
                 className="mx-auto w-full text-gray-700 placeholder-gray-400 rounded-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent border-2 border-stone-400 text-lg bg-stone-100"
             />
-            {results?.users?.length || results?.communities?.length ? (
-                <div className="absolute bg-white rounded-lg shadow-lg overflow-hidden max-h-96 top-16 w-full">
-                    <div className="flex flex-col items-start justify-between px-4 py-2 bg-gray-100">
+            {search.length > 0 && (
+                <div className="absolute bg-gray-100 rounded-lg shadow-lg overflow-hidden max-h-96 top-16 w-full">
+                    <div className="flex flex-col items-start justify-between px-4 py-2">
                         <h2 className="text-gray-900 font-semibold">Users</h2>
                         {results?.users?.length
                             ? results?.users?.map((user: any) => (
@@ -71,8 +73,14 @@ const Search = () => {
                               ))
                             : null}
                     </div>
+                    <Link
+                        href={`/search?q=${search}`}
+                        className="w-full px-4 py-2 bg-gray-100"
+                    >
+                        search for {search} on Mosaic
+                    </Link>
                 </div>
-            ) : null}
+            )}
         </div>
     );
 };
