@@ -88,8 +88,6 @@ export const getServerSideProps = async (ctx: any) => {
 
     let user = await res.json();
 
-    user.display_pic = dp(user.display_pic);
-
     const postsres = await fetch(`${consts.API_URL}/u/${user.id}/posts/0`);
 
     const { posts, pages } = await postsres.json();

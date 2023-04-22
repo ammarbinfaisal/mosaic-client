@@ -34,7 +34,7 @@ const Comment = ({ comment, post_id }: any) => {
     );
     const { vote, upvotes, downvotes } = useMemo(() => data || {}, [data]);
     const { data: replies } = useSWR(
-        () => (comment?.id ? `cm/${comment.id}/replies` : null),
+        comment?.id ? `cm/${comment.id}/replies` : null,
         fetcher()
     );
     const [commentBox, setCommentBox] = useState(false);
