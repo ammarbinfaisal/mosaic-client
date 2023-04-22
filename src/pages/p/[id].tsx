@@ -82,7 +82,7 @@ const Post = ({ post, user, community, comments }: PostProps) => {
             </Head>
             <Main>
                 <Navbar search />
-                <div className="my-4 p-4 bg-gray-100 rounded w-full flex-col">
+                <div className="my-4 py-4 px-2 rounded w-full flex-col">
                     <Link
                         className="text-gray-500 font-bold text-inherit flex items-center"
                         href={`/u/${user?.username}`}
@@ -90,11 +90,11 @@ const Post = ({ post, user, community, comments }: PostProps) => {
                         <Image
                             src={dp(user?.display_pic)}
                             alt="dp"
-                            width={32}
-                            height={32}
+                            width={50}
+                            height={50}
                             className="rounded-full inline"
                         />
-                        <span>{user?.username}</span>
+                        <span className="ml-4">u/{user?.username}</span>
                         <span className="mx-2 my-4">
                             {mounted ? ago(new Date(post.time_created)) : ""}{" "}
                             ago
@@ -148,7 +148,11 @@ const Post = ({ post, user, community, comments }: PostProps) => {
                     </div>
                     <CommentBox post_id={post.id} />
                     {commentss.map((comment) => (
-                        <Comment key={comment.id} comment={comment} />
+                        <Comment
+                            key={comment.id}
+                            comment={comment}
+                            post_id={post.id}
+                        />
                     ))}
                 </div>
             </Main>
@@ -165,8 +169,6 @@ export const getServerSideProps = async (ctx: any) => {
     const user = await fetch(`${consts.API_URL}/u/${postjson.user}`);
     let userjson = await user.json();
     if (!userjson) return { notFound: true };
-
-    userjson.display_pic = dp(userjson.display_pic);
 
     const community = await fetch(
         `${consts.API_URL}/c/info/${postjson.community}`

@@ -62,7 +62,7 @@ const Me = () => {
             <Main>
                 <div className="flex flex-col items-center justify-center">
                     <Image
-                        src={user?.display_pic}
+                        src={dp(user?.display_pic)}
                         width={100}
                         height={100}
                         alt="logo"

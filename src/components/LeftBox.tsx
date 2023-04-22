@@ -60,12 +60,17 @@ const LeftBox = () => {
                 </span>
             </div>
             {/* new post button */}
-            <div className="w-full h-full flex flex-col items-center justify-center">
+            <div className="w-full h-full flex flex-col items-start justify-center">
                 <Link
                     href="/p/create"
-                    className="bg-stone-900 text-white font-bold py-2 px-4 rounded"
+                    className="bg-stone-900 text-white font-bold py-2 px-4 rounded my-2"
                 >
                     new post
+                </Link><Link
+                    href="/c/create"
+                    className="bg-stone-900 text-white font-bold py-2 px-4 rounded my-2"
+                >
+                    new community
                 </Link>
             </div>
         </div>

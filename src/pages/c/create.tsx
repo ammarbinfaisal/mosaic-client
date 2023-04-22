@@ -5,10 +5,12 @@ import { usePost } from "@/hooks/useApi";
 import Auth from "@/components/Auth";
 import Main from "@/components/Main";
 import Button from "@/components/Button";
+import { useRouter } from "next/router";
 
 export default function NewCommunity() {
     const [name, setName] = useState<string>("");
     const [description, setDescription] = useState<string>("");
+    const router = useRouter();
     const post = usePost();
 
     const createCommunity = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -18,6 +20,7 @@ export default function NewCommunity() {
                 name,
                 description,
             });
+            router.push(`/c/${name}`);
             console.log(res);
         } catch (err) {
             console.log(err);

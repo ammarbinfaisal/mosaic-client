@@ -10,7 +10,6 @@ export const msgReducer = (
     state: Msg[],
     action: { type: string; payload: Msg }
 ) => {
-    console.log(action);
     switch (action.type) {
         case "NEW":
             return [...state, action.payload];

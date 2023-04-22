@@ -4,6 +4,7 @@ import consts from "@/consts";
 import Head from "next/head";
 import Image from "next/image";
 import useAuth from "@/hooks/useAuth";
+import Link from "next/link";
 
 const Login = () => {
     const [username, setUsername] = useState("");
@@ -78,6 +79,12 @@ const Login = () => {
                             Login
                         </button>
                     </form>
+                <Link
+                    href="/register"
+                    className="text-stone-900 hover:text-stone-800 hover:underline font-semibold text-xl my-12"
+                >
+                    Don&apos;t have an account? Register here
+                </Link>
                     {error && <p className="mt-4 text-red-800">{error}</p>}
                 </div>
                 <div className="w-full row-span-1 flex justify-center relative">
