@@ -56,6 +56,7 @@ const NewPost = () => {
                             value={title}
                             onChange={(e) => setTitle(e.target.value)}
                             className="py-2 px-4 my-2"
+                            required
                         />
                         <Editor
                             content={content}
