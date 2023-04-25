@@ -22,7 +22,7 @@ const Navbar = (props: INavbarProps) => {
     return (
         <div className="flex flex-col w-full justify-center items-center">
             <nav className="grid grid-cols-6 grid-rows-2 sm:px-12 w-full">
-                <div className="flex flex-row items-center text-white col-start-1 col-end-2">
+                <Link className="flex flex-row items-center text-white col-start-1 col-end-2" href="/">
                     <Image
                         src="/logo@2x.png"
                         width={50}
@@ -32,7 +32,7 @@ const Navbar = (props: INavbarProps) => {
                     <span className="font-semibold text-xl tracking-tight text-stone-900 text-3xl">
                         Mosaic
                     </span>
-                </div>
+                </Link>
                 {props.search && (
                     <div className="w-full max-w-full flex justify-center col-span-3 row-start-2 row-end-3 sm:row-start-1 sm:row-end-2 col-start-1 col-end-7 sm:col-start-2 sm:col-end-5">
                         <Search />
