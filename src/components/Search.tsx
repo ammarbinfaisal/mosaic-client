@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 const Search = () => {
     const [search, setSearch] = useState("");
     const [results, setResults] = useState<any>({});
+    const registeredDocClickRef = React.useRef(false);
 
     useEffect(() => {
         if (search.length === 0) {
@@ -24,6 +25,29 @@ const Search = () => {
     const onChange = (e: any) => {
         setSearch(e.target.value.trim());
     };
+
+    useEffect(() => {
+        if (search.length === 0) {
+            return;
+        }
+        if (registeredDocClickRef.current) {
+            return;
+        }
+
+        function docClick() {
+            setSearch("");
+            setResults({});
+            document.removeEventListener("click", docClick);
+        }
+
+        document.addEventListener("click", docClick);
+        registeredDocClickRef.current = true;
+
+        return () => {
+            document.removeEventListener("click", docClick);
+            registeredDocClickRef.current = false;
+        };
+    }, [search]);
 
     return (
         <div className="flex flex-row items-center justify-between w-full relative">
