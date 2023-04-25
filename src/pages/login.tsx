@@ -5,7 +5,6 @@ import Head from "next/head";
 import Image from "next/image";
 import useAuth from "@/hooks/useAuth";
 import Link from "next/link";
-import Main from "@/components/Main";
 
 const Login = () => {
     const [username, setUsername] = useState("");
@@ -45,7 +44,7 @@ const Login = () => {
             <Head>
                 <title>Mosaic Login</title>
             </Head>
-            <Main>
+            <div className="h-screen w-screen grid grid-row-3 grid-cols-1 bg-light">
                 <div className="flex flex-col items-center justify-center w-full row-span-2">
                     <Image
                         src="/logo@2x.png"
@@ -59,7 +58,7 @@ const Login = () => {
                         onSubmit={handleSubmit}
                     >
                         <input
-                            className="w-full px-4 py-2 placeholder:text-stone-900 bg-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-stone-800"
+                            className="w-full px-4 py-2 placeholder:text-amber-900 bg-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-800"
                             type="text"
                             placeholder="Username"
                             value={username}
@@ -67,7 +66,7 @@ const Login = () => {
                             onChange={(e) => setUsername(e.target.value)}
                         />
                         <input
-                            className="w-full px-4 py-2 placeholder:text-stone-900 bg-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-stone-800"
+                            className="w-full px-4 py-2 placeholder:text-amber-900 bg-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-800"
                             type="password"
                             placeholder="Password"
                             value={password}
@@ -76,7 +75,7 @@ const Login = () => {
                         />
 
                         <button
-                            className="w-full px-4 py-2 bg-gray-100 rounded-md hover:bg-stone-900 hover:text-gray-100 transition-all"
+                            className="w-full px-4 py-2 bg-gray-100 rounded-md hover:bg-amber-900 hover:text-gray-100 transition-all"
                             type="submit"
                         >
                             Login
@@ -90,7 +89,14 @@ const Login = () => {
                     </Link>
                     {error && <p className="mt-4 text-red-800">{error}</p>}
                 </div>
-            </Main>
+                <div className="w-full row-span-1 flex justify-center relative">
+                    <img
+                        src="/Bottom Waves.svg"
+                        alt="bottom waves"
+                        className="absolute bottom-0 scale-125"
+                    />
+                </div>
+            </div>
         </>
     );
 };
