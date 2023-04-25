@@ -26,13 +26,13 @@ const Feed = ({ sort, home }: any) => {
                     : 1;
             }
             if (sort == Sort.new) {
-                return +acreat > +bcreat ? -1 : 1;
+                return +acreat > +bcreat ? 1 : -1;
             }
             if (sort == Sort.top) {
-                return a.upvotes > b.upvotes ? -1 : 1;
+                return (a.upvotes - a.downvotes) > (b.upvotes - b.downvotes)
             }
             if (sort == Sort.old) {
-                return +acreat > +bcreat ? 1 : -1;
+                return +acreat > +bcreat ? -1 : 1;
             }
         });
         setPosts(sorted);
