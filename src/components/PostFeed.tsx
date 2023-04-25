@@ -65,7 +65,7 @@ const PostFeed = ({ post: feedPost }: { post: any }) => {
                     <FontAwesomeIcon
                         icon={faCaretUp}
                         className={`group-hover:text-rose-400 ${
-                            v.vote === 1 ? "text-rose-600" : ""
+                            v?.vote === 1 ? "text-rose-600" : ""
                         }`}
                     />
                 </span>
@@ -74,7 +74,7 @@ const PostFeed = ({ post: feedPost }: { post: any }) => {
                     <FontAwesomeIcon
                         icon={faCaretDown}
                         className={`group-hover:text-rose-400 ${
-                            v.vote === -1 ? "text-rose-600" : ""
+                            v?.vote === -1 ? "text-rose-600" : ""
                         }`}
                     />
                 </span>
