@@ -160,22 +160,22 @@ const Comment = ({ comment, post_id }: any) => {
                             }}
                         />
                     </div>
-                    {isLoggedIn && (
-                        <div className="flex flex-row items-center justify-start w-full py-1">
+                    <div className="flex flex-row items-center justify-start w-full py-1">
+                        {isLoggedIn && (
                             <span
                                 className="text-md text-gray-500 cursor-pointer mx-4"
                                 onClick={toggleCommentBox}
                             >
                                 comment
                             </span>
-                            <span
-                                className="text-md text-gray-500 cursor-pointer mx-4"
-                                onClick={toggleReplies}
-                            >
-                                replies - {replies?.length}
-                            </span>
-                        </div>
-                    )}
+                        )}
+                        <span
+                            className="text-md text-gray-500 cursor-pointer mx-4"
+                            onClick={toggleReplies}
+                        >
+                            replies - {replies?.length}
+                        </span>
+                    </div>
                     <div className="flex flex-col w-full">
                         {commentBox && isLoggedIn && (
                             <div className="border-l-2 border-gray-400 pl-4">
