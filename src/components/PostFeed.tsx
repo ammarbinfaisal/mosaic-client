@@ -25,7 +25,6 @@ const PostFeed = ({ post: feedPost }: { post: any }) => {
     const { data: postt, mutate } = useSWR(() => `p/${post.id}`, fetcher(1000));
     // 0 = no vote, 1 = upvote, -1 = downvote
     const [vote, setVote] = useState<any>(voteData ? voteData.vote : 0);
-    const contentRef = useRef<HTMLDivElement>(null);
     const p = usePost();
 
     const upvote = async () => {

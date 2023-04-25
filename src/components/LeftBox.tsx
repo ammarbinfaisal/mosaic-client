@@ -1,7 +1,13 @@
+import { Sort } from "@/types/sort";
 import Image from "next/image";
 import Link from "next/link";
 
-const LeftBox = () => {
+const LeftBox = ({sort, setSort}: any) => {
+
+    const handleSort = (s: Sort) => {
+        setSort(s);
+    };
+
     return (
         <div className="flex flex-col items-start justify-start">
             <div className="flex flex-col items-start justify-center w-full h-full">
@@ -35,19 +41,25 @@ const LeftBox = () => {
             <div className="w-full h-full my-12 border-t-2 border-b-2 border-stone-400 flex flex-col">
                 <h3 className="text-xl font-bold">sort</h3>
                 <span className="flex">
-                    <input type="radio" id="new" name="sort" value="new" />
+                    <input type="radio" id="new" name="sort" value="new" 
+                        onChange={() => handleSort(Sort.new)}
+                    />
                     <label className="ml-4" htmlFor="new">
                         new
                     </label>
                 </span>
                 <span className="flex">
-                    <input type="radio" id="top" name="sort" value="top" />
+                    <input type="radio" id="top" name="sort" value="top"
+                        onChange={() => handleSort(Sort.top)}
+                    />
                     <label className="ml-4" htmlFor="top">
                         top
                     </label>
                 </span>
                 <span className="flex">
-                    <input type="radio" id="hot" name="sort" value="hot" />
+                    <input type="radio" id="hot" name="sort" value="hot"
+                        onChange={() => handleSort(Sort.hot)}
+                    />
                     <label className="ml-4" htmlFor="hot">
                         hot
                     </label>
