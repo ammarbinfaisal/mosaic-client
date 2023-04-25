@@ -11,12 +11,10 @@ interface INavbarProps {
 
 const Navbar = (props: INavbarProps) => {
     const auth = useAuth();
-    const router = useRouter();
 
     const logout = () => {
         localStorage.removeItem("token");
         auth.mutate?.();
-        router.push("/login");
     };
 
     return (
