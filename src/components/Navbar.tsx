@@ -9,6 +9,9 @@ interface INavbarProps {
     search?: boolean;
 }
 
+const logOutInClass =
+    "hidden md:inline-block text-md px-4 py-2 leading-none border rounded text-stone-900 border-stone-400 hover:border-transparent hover:text-gray-900 hover:bg-stone-400";
+
 const Navbar = (props: INavbarProps) => {
     const auth = useAuth();
 
@@ -53,12 +56,15 @@ const Navbar = (props: INavbarProps) => {
                         />
                         <span className="hidden md:inline">Profile</span>
                     </Link>
-                    <button
-                        className="hidden md:inline-block text-md px-4 py-2 leading-none border rounded text-stone-900 border-stone-400 hover:border-transparent hover:text-gray-900 hover:bg-stone-400"
-                        onClick={logout}
-                    >
-                        Logout
-                    </button>
+                    {auth.isLoggedIn ? (
+                        <button className={logOutInClass} onClick={logout}>
+                            Logout
+                        </button>
+                    ) : (
+                        <Link href="/login" className={logOutInClass}>
+                            login
+                        </Link>
+                    )}
                 </div>
             </nav>
         </div>
