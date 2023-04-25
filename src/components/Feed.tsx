@@ -3,9 +3,11 @@ import PostFeed from "./PostFeed";
 import { fetcher, useGet } from "@/hooks/useApi";
 import useSWR from "swr";
 import { Sort } from "@/types/sort";
+import useAuth from "@/hooks/useAuth";
 
 const Feed = ({ sort, home }: any) => {
-    const { data: h } = useSWR("me/feed", fetcher(1000 * 60 * 5));
+    const auth = useAuth();
+    const { data: h } = useSWR(auth.isLoggedIn ? "me/feed" : null, fetcher(1000 * 60 * 5));
     const { data: trending } = useSWR("trending", fetcher(1000 * 60 * 5));
     const [posts, setPosts] = useState<any>([]);
 
@@ -16,6 +18,10 @@ const Feed = ({ sort, home }: any) => {
             setPosts(trending);
         }
     }, [h, home, trending]);
+
+    if (home) {
+        if (!auth) return <p>login to see your feed</p>;
+    }
 
     return (
         <div className="w-full">

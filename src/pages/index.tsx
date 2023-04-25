@@ -16,19 +16,21 @@ export default function Home() {
             <Head>
                 <title>Mosaic</title>
             </Head>
-            <Auth>
-                <Main>
-                    <Navbar search />
-                    <div className="flex flex-row flex-grow w-full">
-                        <div className="flex flex-col items-center justify-center h-full mx-8 my-12">
-                            <LeftBox setSort={setSort} setHome={setHome} home={home} />
-                        </div>
-                        <div className="flex-grow flex flex-col items-center justify-center h-full">
-                            <Feed sort={sort} home={home} />
-                        </div>
+            <Main>
+                <Navbar search />
+                <div className="flex flex-row flex-grow w-full">
+                    <div className="flex flex-col items-center justify-center h-full mx-8 my-12">
+                        <LeftBox
+                            setSort={setSort}
+                            setHome={setHome}
+                            home={home}
+                        />
                     </div>
-                </Main>
-            </Auth>
+                    <div className="flex-grow flex flex-col items-center justify-center h-full">
+                        <Feed sort={sort} home={home} />
+                    </div>
+                </div>
+            </Main>
         </>
     );
 }
