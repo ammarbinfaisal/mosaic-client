@@ -5,13 +5,17 @@ import Main from "@/components/Main";
 import Navbar from "@/components/Navbar";
 
 const CommentPage = ({ comment }: any) => {
+    const htmlNode = document.createElement("div");
+    htmlNode.innerHTML = comment.content;
+    const title = htmlNode.textContent?.slice(0, 50) || "";
+
     return (
         <>
             <Head>
-                <title>{comment.content.slice(0, 20)}</title>
+                <title>{title}</title>
             </Head>
             <Main>
-                <Navbar search/>
+                <Navbar search />
                 <hr className="my-4 bg-transparent" />
                 <Comment comment={comment} isPage depth={0} />
             </Main>
