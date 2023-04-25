@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faNavicon } from "@fortawesome/free-solid-svg-icons";
 import useAuth from "@/hooks/useAuth";
+import useWindowSize from "@/hooks/useWindowSize";
 
 const mdwidth = 768;
 
@@ -17,26 +18,11 @@ export default function Home() {
     const [sort, setSort] = useState<Sort>(Sort.hot);
     const [home, setHome] = useState<boolean>(auth.isLoggedIn);
     const [leftBox, setLeftBox] = useState<boolean>(false);
+    const { width } = useWindowSize();
 
     const toggleLeftBox = () => {
         setLeftBox(!leftBox);
     };
-
-    useEffect(() => {
-        const fn = () => {
-            if (window.innerWidth > mdwidth) {
-                setLeftBox(true);
-            } else {
-                setLeftBox(false);
-            }
-        };
-        fn();
-        window.addEventListener("resize", fn);
-
-        return () => {
-            window.removeEventListener("resize", fn);
-        };
-    }, []);
 
     return (
         <>
@@ -48,7 +34,7 @@ export default function Home() {
                 <div className="flex flex-row flex-grow w-full">
                     <div
                         className={`${
-                            leftBox ? "w-1/2 md:w-auto" : "w-0 overflow-hidden"
+                            width >= mdwidth || leftBox ? "w-1/2 md:w-auto" : "w-0 overflow-hidden"
                         } md:flex flex-col items-center justify-center h-full mx-0 md:mx-8 my-12 transition-all duration-500 ease-in-out`}
                     >
                         <LeftBox
@@ -59,7 +45,7 @@ export default function Home() {
                     </div>
                     <div
                         className={`flex-grow flex flex-col items-center justify-center h-full z-10 bg-white transition-all duration-500 ease-in-out
-                         ${leftBox ? "opacity-20" : "opacity-100"}`}
+                         ${width < mdwidth && leftBox ? "opacity-20" : "opacity-100"}`}
                     >
                         <Feed sort={sort} home={home} />
                     </div>
