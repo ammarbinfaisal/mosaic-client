@@ -16,7 +16,7 @@ const User = ({ user, posts, comments }: any) => {
                 <title>{user.username}</title>
             </Head>
             <Main>
-            <Navbar/>
+                <Navbar search />
                 <div className="flex flex-col items-center justify-center">
                     <Image
                         src={dp(user.display_pic)}
