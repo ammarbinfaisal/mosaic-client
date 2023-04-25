@@ -20,7 +20,10 @@ const Navbar = (props: INavbarProps) => {
     return (
         <div className="flex flex-col w-full justify-center items-center">
             <nav className="grid grid-cols-6 grid-rows-1 md:px-12 w-full">
-                <Link className="flex flex-row items-center text-white col-start-1 col-end-2" href="/">
+                <Link
+                    className="flex flex-row items-center text-white col-start-1 col-end-2"
+                    href="/"
+                >
                     <Image
                         src="/logo@2x.png"
                         width={50}
