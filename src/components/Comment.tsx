@@ -16,14 +16,16 @@ import sanitize from "@/utils/sanitize";
 import dp from "@/utils/dp";
 import Link from "next/link";
 import ago from "@/utils/ago";
+import useWindowSize from "@/hooks/useWindowSize";
 
 const CommentBox = dynamic(() => import("@/components/CommentBox"), {
     ssr: false,
 });
 
-const Comment = ({ comment, post_id }: any) => {
+const Comment = ({ comment, post_id, isPage, depth }: any) => {
     const { isLoggedIn } = useAuth();
     const [cm, setCm] = useState(comment);
+    const { width } = useWindowSize();
     const { data: user } = useSWR(
         () => (comment?.user ? `u/${comment.user}` : null),
         fetcher(1000 * 60 * 5)
@@ -39,8 +41,8 @@ const Comment = ({ comment, post_id }: any) => {
         fetcher()
     );
     const [commentBox, setCommentBox] = useState(false);
-    const [showReplies, setShowReplies] = useState(false);
-    const [expanded, setExpanded] = useState(true);
+    const [showReplies, setShowReplies] = useState(isPage && depth < 3);
+    const [expanded, setExpanded] = useState(depth < 4);
     const [mounted, setMounted] = useState(false);
     const p = usePost();
 
@@ -121,7 +123,9 @@ const Comment = ({ comment, post_id }: any) => {
                     </span>
                     <FontAwesomeIcon
                         icon={expanded ? faMinimize : faMaximize}
-                        className="text-gray-500 mt-4 cursor-pointer"
+                        className={`text-gray-500 mt-4 cursor-pointer ${
+                            width < 768 && depth > 3 ? "hidden" : ""
+                        }`}
                         onClick={toggleComment}
                     />
                     <Link href={`/cm/${comment.id}`}>
@@ -170,7 +174,9 @@ const Comment = ({ comment, post_id }: any) => {
                             </span>
                         )}
                         <span
-                            className="text-md text-gray-500 cursor-pointer mx-4"
+                            className={`text-md text-gray-500 cursor-pointer mx-4
+                            ${width < 768 && depth > 5 ? "hidden" : ""}
+                            `}
                             onClick={toggleReplies}
                         >
                             replies - {replies?.length}
@@ -193,6 +199,8 @@ const Comment = ({ comment, post_id }: any) => {
                                     key={reply.id}
                                     comment={reply}
                                     post_id={post_id}
+                                    isPage={isPage}
+                                    depth={depth + 1}
                                 />
                             ))}
                     </div>

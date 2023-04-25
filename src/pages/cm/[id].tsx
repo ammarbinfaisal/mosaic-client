@@ -10,7 +10,7 @@ const CommentPage = ({ comment }: any) => {
                 <title>{comment.content.slice(0, 20)}</title>
             </Head>
             <Main>
-                <Comment comment={comment} />
+                <Comment comment={comment} isPage depth={0} />
             </Main>
         </>
     );
