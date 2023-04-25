@@ -35,6 +35,10 @@ const NewPost = () => {
                 content,
                 community_id,
             });
+            if (res.status !== 200) {
+                msgDispatch(res.data.error);
+                return;
+            }
             console.log(res);
             router.push(`/p/${res.data.id}`);
         } catch (err) {

@@ -54,6 +54,10 @@ const CommunityPage = ({ posts, pages, community }: Props) => {
     const joinOrLeave = (x: string) => {
         post(`c/${x}`, {
             id: community.id,
+        }).then((res) => {
+            if (res.status !== 200) {
+                msgDispatch(res.data.error);
+            }
         }).catch((err) => {
             msgDispatch(err.message);
         });

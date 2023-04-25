@@ -32,13 +32,15 @@ const CommentBox = ({ post_id, comment_id }: CommentBoxProps) => {
             parent: comment_id,
         })
             .then(async (res) => {
-                console.log(res);
-                if (comment_id) await mutate(`cm/${comment_id}/replies`);
-                await mutate(`p/${post_id}/comments`);
-                setComment("");
+                if (res.status != 200) {
+                    msgDispatch(res.data.error);
+                } else {
+                    if (comment_id) await mutate(`cm/${comment_id}/replies`);
+                    await mutate(`p/${post_id}/comments`);
+                    setComment("");
+                }
             })
             .catch((err) => {
-                console.log(err);
                 msgDispatch("comment failed");
             });
     };
@@ -49,19 +51,25 @@ const CommentBox = ({ post_id, comment_id }: CommentBoxProps) => {
         htmlNode.innerHTML = comment;
         const content = htmlNode.innerText;
         console.log(content);
-        const body : any = {
+        const body: any = {
             content,
             post: post_id,
         };
         if (comment_id) body.parent = comment_id;
-        post("cm/completion", body).then(async (res) => {
-            setComment(comment + res.data.completion);
-        }).catch((err) => {
-            console.log(err);
-            msgDispatch("comment failed");
-        });
-    }
-
+        post("cm/completion", body)
+            .then((res) => {
+                if (res.status != 200) {
+                    msgDispatch(res.data.error);
+                    return;
+                } else {
+                    setComment(comment + res.data.completion);
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+                msgDispatch("comment failed");
+            });
+    };
 
     if (!isLoggedIn) return null;
     if (!mounted) return null;

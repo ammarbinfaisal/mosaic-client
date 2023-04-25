@@ -23,6 +23,10 @@ export default function NewCommunity() {
                 name,
                 description,
             });
+            if (res.status !== 200) {
+                messageDispatch(res.data.error);
+                return;
+            }
             router.push(`/c/${name}`);
             console.log(res);
         } catch (err) {
