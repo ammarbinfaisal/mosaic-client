@@ -20,9 +20,9 @@ const PostFeed = ({ post: feedPost }: { post: any }) => {
         fetcher()
     );
     // 0 = no vote, 1 = upvote, -1 = downvote
-    const { data: v } = useSWR(
+    const { data: v, mutate: mutatev } = useSWR(
         () => (post?.id ? `p/${post.id}/vote` : null),
-        fetcher()
+        fetcher(1000)
     );
     const { data: postt, mutate } = useSWR(() => `p/${post.id}`, fetcher(1000));
     const p = usePost();
@@ -32,6 +32,7 @@ const PostFeed = ({ post: feedPost }: { post: any }) => {
         p(`p/${post.id}/upvote`, {})
             .then(() => {
                 mutate();
+                mutatev();
             })
             .catch(() => {
                 msgDispatch("upvote failed");
@@ -42,6 +43,7 @@ const PostFeed = ({ post: feedPost }: { post: any }) => {
         p(`p/${post.id}/downvote`, {})
             .then(() => {
                 mutate();
+                mutatev();
             })
             .catch(() => {
                 msgDispatch("downvote failed");
