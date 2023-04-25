@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import useAuth from "@/hooks/useAuth";
 import { useRouter } from "next/router";
 import { FetchError } from "@/hooks/useApi";
@@ -8,8 +8,9 @@ interface IAuthProps {
 }
 
 const Auth = (props: IAuthProps) => {
-    const { isLoggedIn, isLoading, error } = useAuth();
+    const { isLoggedIn, isLoading, error, user } = useAuth();
     const [isMounted, setIsMounted] = useState(false);
+    const toredirectRef = useRef(false);
     const router = useRouter();
 
     useEffect(() => {
@@ -17,14 +18,17 @@ const Auth = (props: IAuthProps) => {
     }, []);
 
     useEffect(() => {
-        setTimeout(() => {
-            if (
-                (!isLoggedIn && !isLoading) ||
-                (error && error instanceof FetchError)
-            ) {
-                router.push("/login");
-            }
-        }, 500);
+        const scheduleRedirect = () => {
+            setTimeout(() => {
+                if (toredirectRef.current) router.push("/login");
+            }, 1000);
+        };
+        if (!isLoggedIn && !isLoading) {
+            toredirectRef.current = true;
+            scheduleRedirect();
+        } else {
+            toredirectRef.current = false;
+        }
     }, [isLoggedIn, isLoading, router, error]);
 
     if (!isMounted) {

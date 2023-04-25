@@ -11,6 +11,7 @@ const Login = () => {
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
     const router = useRouter();
+    const auth = useAuth();
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -31,6 +32,7 @@ const Login = () => {
             const token = await response.text();
             localStorage.setItem("token", token);
             localStorage.setItem("username", username);
+            auth.mutate();
             router.push("/");
         } catch (error) {
             console.log(error);
@@ -79,12 +81,12 @@ const Login = () => {
                             Login
                         </button>
                     </form>
-                <Link
-                    href="/register"
-                    className="text-stone-900 hover:text-stone-800 hover:underline font-semibold text-xl my-12"
-                >
-                    Don&apos;t have an account? Register here
-                </Link>
+                    <Link
+                        href="/register"
+                        className="text-stone-900 hover:text-stone-800 hover:underline font-semibold text-xl my-12"
+                    >
+                        Don&apos;t have an account? Register here
+                    </Link>
                     {error && <p className="mt-4 text-red-800">{error}</p>}
                 </div>
                 <div className="w-full row-span-1 flex justify-center relative">
