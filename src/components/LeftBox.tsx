@@ -10,7 +10,7 @@ const LeftBox = ({ setSort, setHome, home }: any) => {
         };
 
     return (
-        <div className="flex flex-col items-start justify-start">
+        <div className="flex flex-col items-start justify-start w-full">
             <div className="flex flex-col items-start justify-center w-full h-full">
                 <button
                     onClick={() => setHome(true)}
@@ -108,13 +108,13 @@ const LeftBox = ({ setSort, setHome, home }: any) => {
                     href="/p/create"
                     className="bg-stone-900 text-white font-bold py-2 px-4 rounded my-2"
                 >
-                    new post
+                    new&nbsp;post
                 </Link>
                 <Link
                     href="/c/create"
                     className="bg-stone-900 text-white font-bold py-2 px-4 rounded my-2"
                 >
-                    new community
+                    new&nbsp;community
                 </Link>
             </div>
         </div>

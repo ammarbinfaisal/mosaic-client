@@ -18,6 +18,10 @@ export default function Home() {
     const [home, setHome] = useState<boolean>(auth.isLoggedIn);
     const [leftBox, setLeftBox] = useState<boolean>(false);
 
+    const toggleLeftBox = () => {
+        setLeftBox(!leftBox);
+    };
+
     useEffect(() => {
         const fn = () => {
             if (window.innerWidth > mdwidth) {
@@ -32,7 +36,7 @@ export default function Home() {
         return () => {
             window.removeEventListener("resize", fn);
         };
-    }, [leftBox]);
+    }, []);
 
     return (
         <>
@@ -44,7 +48,7 @@ export default function Home() {
                 <div className="flex flex-row flex-grow w-full">
                     <div
                         className={`${
-                            leftBox ? "w-1/2 md:w-auto" : "aboslute w-0 overflow-hidden"
+                            leftBox ? "w-1/2 md:w-auto" : "w-0 overflow-hidden"
                         } md:flex flex-col items-center justify-center h-full mx-0 md:mx-8 my-12 transition-all duration-500 ease-in-out`}
                     >
                         <LeftBox
@@ -54,21 +58,20 @@ export default function Home() {
                         />
                     </div>
                     <div
-                        className={`flex-grow flex flex-col items-center justify-center h-full ${
-                            leftBox ? "w-0" : "w-full z-10"
-                        }`}
+                        className={`flex-grow flex flex-col items-center justify-center h-full z-10 bg-white transition-all duration-500 ease-in-out
+                         ${leftBox ? "opacity-20" : "opacity-100"}`}
                     >
                         <Feed sort={sort} home={home} />
                     </div>
                 </div>
                 <div
-                    className="bg-black w-12 h-12 fixed bottom-0 left-0 opacity-50 z-10 md:hidden"
-                    onClick={() => setLeftBox(!leftBox)}
+                    className="w-12 h-12 fixed bottom-0 left-0 z-20 md:hidden"
+                    onClick={toggleLeftBox}
                 >
                     <FontAwesomeIcon
                         icon={faNavicon}
                         className="text-2xl fixed bottom-4 right-4"
-                        color="white"
+                        color="black"
                     />
                 </div>
             </Main>
