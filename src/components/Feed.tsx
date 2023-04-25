@@ -20,7 +20,7 @@ const Feed = ({ sort, home }: any) => {
     }, [h, home, trending]);
 
     if (home) {
-        if (!auth.isLoading) return <p>login to see your feed</p>;
+        if (!auth.isLoggedIn) return <p>login to see your feed</p>;
     }
 
     return (
