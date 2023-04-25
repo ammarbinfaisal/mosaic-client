@@ -6,11 +6,14 @@ import Auth from "@/components/Auth";
 import Main from "@/components/Main";
 import Button from "@/components/Button";
 import { useRouter } from "next/router";
+import { useContext } from "react";
+import { MsgDispatchContext } from "@/context/message";
 
 export default function NewCommunity() {
     const [name, setName] = useState<string>("");
     const [description, setDescription] = useState<string>("");
     const router = useRouter();
+    const messageDispatch = useContext(MsgDispatchContext);
     const post = usePost();
 
     const createCommunity = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -24,6 +27,7 @@ export default function NewCommunity() {
             console.log(res);
         } catch (err) {
             console.log(err);
+            messageDispatch("something went wrong while creating community");
         }
     };
 

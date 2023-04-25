@@ -38,6 +38,7 @@ const NewPost = () => {
             router.push(`/p/${res.data.id}`);
         } catch (err) {
             console.log(err);
+            msgDispatch("something went wrong while creating post");
         }
     };
 
