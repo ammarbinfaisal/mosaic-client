@@ -11,6 +11,7 @@ import useJoined from "@/hooks/useJoined";
 import sanitize from "@/utils/sanitize";
 import ago from "@/utils/ago";
 import Head from "next/head";
+import PostFeed from "@/components/PostFeed";
 
 interface Props {
     posts: any[];
@@ -54,13 +55,15 @@ const CommunityPage = ({ posts, pages, community }: Props) => {
     const joinOrLeave = (x: string) => {
         post(`c/${x}`, {
             id: community.id,
-        }).then((res) => {
-            if (res.status !== 200) {
-                msgDispatch(res.data.error);
-            }
-        }).catch((err) => {
-            msgDispatch(err.message);
-        });
+        })
+            .then((res) => {
+                if (res.status !== 200) {
+                    msgDispatch(res.data.error);
+                }
+            })
+            .catch((err) => {
+                msgDispatch(err.message);
+            });
     };
 
     const join = () => {
@@ -74,7 +77,6 @@ const CommunityPage = ({ posts, pages, community }: Props) => {
         setHasJoined(false);
         msgDispatch(`left c/${community.name}`);
     };
-
 
     useEffect(() => {
         setMounted(true);
@@ -103,20 +105,7 @@ const CommunityPage = ({ posts, pages, community }: Props) => {
                     </span>
                 </div>
                 {postss.map((post: any) => (
-                    <div key={post.id} className="my-4 p-4 bg-gray-100 rounded">
-                        <Link href={`/p/${post.id}`}>
-                            <h1 className="text-xl font-bold">{post.title}</h1>
-                        </Link>
-                        <span className="text-gray-500">
-                            {ago(new Date(post.time_created))}
-                        </span>
-                        <p
-                            className="text-gray-500 break-words"
-                            dangerouslySetInnerHTML={{
-                                __html: mounted ? sanitize(post.content) : "",
-                            }}
-                        />
-                    </div>
+                    <PostFeed key={post.id} post={post} />
                 ))}
                 <div className="flex flex-row items-center justify-center">
                     <Button
