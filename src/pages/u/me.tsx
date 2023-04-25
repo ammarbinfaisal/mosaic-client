@@ -8,6 +8,7 @@ import { usePost } from "@/hooks/useApi";
 import consts from "@/consts";
 import { MsgDispatchContext } from "@/context/message";
 import dp from "@/utils/dp";
+import Head from "next/head";
 
 const Me = () => {
     const [oldPassword, setOldPassword] = useState("");
@@ -59,6 +60,9 @@ const Me = () => {
 
     return (
         <Auth>
+            <Head>
+                <title>me</title>
+            </Head>
             <Main>
                 <div className="flex flex-col items-center justify-center">
                     <Image

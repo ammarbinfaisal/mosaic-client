@@ -8,6 +8,7 @@ import Navbar from "@/components/Navbar";
 import Button from "@/components/Button";
 import Auth from "@/components/Auth";
 import dynamic from "next/dynamic";
+import Head from "next/head";
 
 const Editor = dynamic(() => import("@/components/Editor"), { ssr: false });
 
@@ -45,6 +46,9 @@ const NewPost = () => {
     return (
         <Auth>
             <Main>
+                <Head>
+                    <title>create post</title>
+                </Head>
                 <Navbar />
                 {joined?.length ? (
                     <form

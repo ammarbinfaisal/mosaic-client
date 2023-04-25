@@ -10,6 +10,7 @@ import { MsgDispatchContext } from "@/context/message";
 import useJoined from "@/hooks/useJoined";
 import sanitize from "@/utils/sanitize";
 import ago from "@/utils/ago";
+import Head from "next/head";
 
 interface Props {
     posts: any[];
@@ -77,6 +78,9 @@ const CommunityPage = ({ posts, pages, community }: Props) => {
 
     return (
         <Main>
+            <Head>
+                <title>c/{name}</title>
+            </Head>
             <Navbar search />
             <div className="flex flex-col w-full px-4 mx-auto my-12">
                 <h1 className="text-3xl font-bold">c/{name}</h1>
