@@ -59,7 +59,7 @@ const Login = () => {
                         onSubmit={handleSubmit}
                     >
                         <input
-                            className="w-full px-4 py-2 placeholder:text-stone-900 bg-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-stome-800"
+                            className="w-full px-4 py-2 placeholder:text-stone-900 bg-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-stone-800"
                             type="text"
                             placeholder="Username"
                             value={username}
@@ -67,7 +67,7 @@ const Login = () => {
                             onChange={(e) => setUsername(e.target.value)}
                         />
                         <input
-                            className="w-full px-4 py-2 placeholder:text-stome-900 bg-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-stome-800"
+                            className="w-full px-4 py-2 placeholder:text-stone-900 bg-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-stone-800"
                             type="password"
                             placeholder="Password"
                             value={password}
@@ -76,7 +76,7 @@ const Login = () => {
                         />
 
                         <button
-                            className="w-full px-4 py-2 bg-gray-100 rounded-md hover:bg-stome-900 hover:text-gray-100 transition-all"
+                            className="w-full px-4 py-2 bg-gray-100 rounded-md hover:bg-stone-900 hover:text-gray-100 transition-all"
                             type="submit"
                         >
                             Login
