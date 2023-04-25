@@ -29,19 +29,23 @@ const PostFeed = ({ post: feedPost }: { post: any }) => {
     const msgDispatch = useContext(MsgDispatchContext);
 
     const upvote = () => {
-        p(`p/${post.id}/upvote`, {}).then(() => {
-            mutate();
-        }).catch(() => {
-            msgDispatch("upvote failed");
-        });
+        p(`p/${post.id}/upvote`, {})
+            .then(() => {
+                mutate();
+            })
+            .catch(() => {
+                msgDispatch("upvote failed");
+            });
     };
 
     const downvote = () => {
-        p(`p/${post.id}/downvote`, {}).then(() => {
-            mutate();
-        }).catch(() => {
-            msgDispatch("downvote failed");
-        });
+        p(`p/${post.id}/downvote`, {})
+            .then(() => {
+                mutate();
+            })
+            .catch(() => {
+                msgDispatch("downvote failed");
+            });
     };
 
     useEffect(() => {
@@ -60,10 +64,11 @@ const PostFeed = ({ post: feedPost }: { post: any }) => {
             key={post.id}
             className="my-4 p-4 bg-gray-100 rounded w-full flex flex-row"
         >
-            <div className="flex flex-col justify-between mr-8 h-8">
+            <div className="flex flex-col justify-center items-center mr-8 h-12">
                 <span className="cursor-pointer group" onClick={upvote}>
                     <FontAwesomeIcon
                         icon={faCaretUp}
+                        size="lg"
                         className={`group-hover:text-rose-400 ${
                             v?.vote === 1 ? "text-rose-600" : ""
                         }`}
@@ -73,6 +78,7 @@ const PostFeed = ({ post: feedPost }: { post: any }) => {
                 <span className="cursor-pointer group" onClick={downvote}>
                     <FontAwesomeIcon
                         icon={faCaretDown}
+                        size="lg"
                         className={`group-hover:text-rose-400 ${
                             v?.vote === -1 ? "text-rose-600" : ""
                         }`}
@@ -80,12 +86,10 @@ const PostFeed = ({ post: feedPost }: { post: any }) => {
                 </span>
             </div>
             <div>
-                <span>
-                    {user?.username} in
-                </span>
-                    <Link href={`/c/${community?.name}`} className="ml-2">
-                        c/{community?.name}
-                    </Link>
+                <span>{user?.username} in</span>
+                <Link href={`/c/${community?.name}`} className="ml-2">
+                    c/{community?.name}
+                </Link>
                 <span className="text-gray-500"> · </span>
                 <span className="text-gray-500">
                     {ago(new Date(post.time_created))} ago
