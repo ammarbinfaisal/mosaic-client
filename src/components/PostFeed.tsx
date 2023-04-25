@@ -1,11 +1,12 @@
 import { fetcher, usePost } from "@/hooks/useApi";
 import Link from "next/link";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useContext } from "react";
 import useSWR from "swr";
 import { faCaretUp, faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ago from "@/utils/ago";
 import sanitize from "@/utils/sanitize";
+import { MsgDispatchContext } from "@/context/message";
 
 const PostFeed = ({ post: feedPost }: { post: any }) => {
     const [post, setPost] = useState<any>(feedPost);
@@ -18,35 +19,29 @@ const PostFeed = ({ post: feedPost }: { post: any }) => {
         () => `c/info/${post.community}`,
         fetcher()
     );
-    const { data: voteData } = useSWR(
+    // 0 = no vote, 1 = upvote, -1 = downvote
+    const { data: v } = useSWR(
         () => (post?.id ? `p/${post.id}/vote` : null),
         fetcher()
     );
     const { data: postt, mutate } = useSWR(() => `p/${post.id}`, fetcher(1000));
-    // 0 = no vote, 1 = upvote, -1 = downvote
-    const [vote, setVote] = useState<any>(voteData ? voteData.vote : 0);
     const p = usePost();
+    const msgDispatch = useContext(MsgDispatchContext);
 
-    const upvote = async () => {
-        await p(`p/${post.id}/upvote`, {});
-        if (vote === 1) {
-            setVote(0);
+    const upvote = () => {
+        p(`p/${post.id}/upvote`, {}).then(() => {
             mutate();
-        } else {
-            setVote(1);
-            mutate();
-        }
+        }).catch(() => {
+            msgDispatch("upvote failed");
+        });
     };
 
-    const downvote = async () => {
-        await p(`p/${post.id}/downvote`, {});
-        if (vote === -1) {
-            setVote(0);
+    const downvote = () => {
+        p(`p/${post.id}/downvote`, {}).then(() => {
             mutate();
-        } else {
-            setVote(-1);
-            mutate();
-        }
+        }).catch(() => {
+            msgDispatch("downvote failed");
+        });
     };
 
     useEffect(() => {
@@ -56,10 +51,6 @@ const PostFeed = ({ post: feedPost }: { post: any }) => {
     useEffect(() => {
         if (!rendered) setRendered(true);
     }, [rendered]);
-
-    useEffect(() => {
-        if (voteData) setVote(voteData.vote);
-    }, [voteData]);
 
     if (!rendered) return null;
     if (!post) return null;
@@ -74,7 +65,7 @@ const PostFeed = ({ post: feedPost }: { post: any }) => {
                     <FontAwesomeIcon
                         icon={faCaretUp}
                         className={`group-hover:text-rose-400 ${
-                            vote === 1 ? "text-rose-600" : ""
+                            v.vote === 1 ? "text-rose-600" : ""
                         }`}
                     />
                 </span>
@@ -83,7 +74,7 @@ const PostFeed = ({ post: feedPost }: { post: any }) => {
                     <FontAwesomeIcon
                         icon={faCaretDown}
                         className={`group-hover:text-rose-400 ${
-                            vote === -1 ? "text-rose-600" : ""
+                            v.vote === -1 ? "text-rose-600" : ""
                         }`}
                     />
                 </span>
