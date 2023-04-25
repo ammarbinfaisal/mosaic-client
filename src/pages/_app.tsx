@@ -1,14 +1,12 @@
 import "@/styles/globals.css";
 import { useCallback, useEffect, useReducer } from "react";
 import type { AppProps } from "next/app";
-import useSWR, { SWRConfig } from "swr";
-import { Comfortaa } from "next/font/google";
+import { SWRConfig } from "swr";
 
 import { MsgDispatchContext, msgReducer } from "@/context/message";
 import Toasts from "@/components/Toasts";
 import { fetcher } from "@/hooks/useApi";
 
-const font = Comfortaa({ weight: "400", subsets: ["latin"] });
 
 export default function App({ Component, pageProps }: AppProps) {
     const [messages, setMessages] = useReducer(msgReducer, []);
@@ -31,7 +29,7 @@ export default function App({ Component, pageProps }: AppProps) {
                 }}
             >
             <Toasts messages={messages} />
-            <div className={`${font.className} w-full h-screen`}>
+            <div className="w-full h-screen">
                 <Component {...pageProps} />;
             </div>
             </SWRConfig>
