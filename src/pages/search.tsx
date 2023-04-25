@@ -4,6 +4,7 @@ import PostFeed from "@/components/PostFeed";
 import Comment from "@/components/Comment";
 import { useRouter } from "next/router";
 import useSWR from "swr";
+import Head from "next/head";
 
 const Search = () => {
     const router = useRouter();
@@ -12,6 +13,9 @@ const Search = () => {
 
     return (
         <Main>
+            <Head>
+                <title>Search</title>
+            </Head>
             <Navbar search />
             <div className="flex flex-col items-start justify-center w-11/12">
                 {results?.posts?.length
