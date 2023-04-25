@@ -15,6 +15,7 @@ const Feed = ({ sort }: any) => {
                         let bcreat = new Date(b.time_created);
                         let acreat = new Date(a.time_created);
                         if (sort == Sort.hot) {
+                            console.log("hot");
                             return (a.upvotes + a.downvotes) /
                                 (Date.now() - +acreat) >
                                 (b.upvotes + b.downvotes) /
@@ -23,13 +24,16 @@ const Feed = ({ sort }: any) => {
                                 : 1;
                         }
                         if (sort == Sort.new) {
+                            console.log("new");
                             return +acreat > +bcreat ? -1 : 1;
                         }
                         if (sort == Sort.top) {
+                            console.log("top");
                             return a.upvotes > b.upvotes ? -1 : 1;
                         }
                         if (sort == Sort.old) {
-                            return +acreat < +bcreat ? -1 : 1;
+                            console.log("old");
+                            return +acreat > +bcreat ? 1 : -1;
                         }
                     })
                     .map((post: any) => <PostFeed key={post.id} post={post} />)}
