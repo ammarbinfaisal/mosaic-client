@@ -3,6 +3,7 @@ import useAuth from "@/hooks/useAuth";
 import {
     faCaretDown,
     faCaretUp,
+    faUpRightFromSquare,
     faMaximize,
     faMinimize,
 } from "@fortawesome/free-solid-svg-icons";
@@ -96,7 +97,7 @@ const Comment = ({ comment, post_id }: any) => {
     return (
         <div className="flex w-full mt-4 h-full bg-gray-100">
             <div className="flex flex-col items-center justify-start w-12 mr-4 bg-gray-200">
-                <div className="flex flex-col items-center justify-center max-h-24 my-4 h-full">
+                <div className="flex flex-col items-center justify-center min-h-24 my-4 h-full">
                     <span className="cursor-pointer group" onClick={upvote}>
                         <FontAwesomeIcon
                             size="lg"
@@ -123,6 +124,12 @@ const Comment = ({ comment, post_id }: any) => {
                         className="text-gray-500 mt-4 cursor-pointer"
                         onClick={toggleComment}
                     />
+                    <Link href={`/cm/${comment.id}`}>
+                        <FontAwesomeIcon
+                            icon={faUpRightFromSquare}
+                            className="text-gray-500 mt-4 cursor-pointer"
+                        />
+                    </Link>
                 </div>
             </div>
             <div className="flex flex-col w-full">
