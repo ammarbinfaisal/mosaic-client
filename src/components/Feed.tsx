@@ -16,7 +16,7 @@ const Feed = ({ sort, home }: any) => {
 
     useEffect(() => {
         let sorted: any = home ? h : trending;
-        sorted.sort((a: any, b: any) => {
+        sorted?.sort((a: any, b: any) => {
             let bcreat = new Date(b.time_created);
             let acreat = new Date(a.time_created);
             if (sort == Sort.hot) {
