@@ -30,6 +30,19 @@ const NewPost = () => {
             msgDispatch("please select a community");
         }
         try {
+            if (title.trim().length < 1) {
+                msgDispatch("title cannot be empty");
+                return;
+            }
+
+            const htmlNode = document.createElement("div");
+            htmlNode.innerHTML = content;
+            const cont = htmlNode.innerText;
+            if (cont.trim().length < 1) {
+                msgDispatch("post cannot be empty");
+                return;
+            }
+
             const res = await post("p/create", {
                 title,
                 content,

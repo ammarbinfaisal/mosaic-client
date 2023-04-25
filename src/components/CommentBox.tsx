@@ -26,6 +26,15 @@ const CommentBox = ({ post_id, comment_id }: CommentBoxProps) => {
 
     const submitComment = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+
+        const htmlNode = document.createElement("div");
+        htmlNode.innerHTML = comment;
+        const content = htmlNode.innerText;
+        if (content.trim().length < 1) {
+            msgDispatch("comment cannot be empty");
+            return;
+        }
+
         post("cm/create", {
             content: comment,
             post: post_id,

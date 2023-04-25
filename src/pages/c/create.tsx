@@ -19,6 +19,22 @@ export default function NewCommunity() {
     const createCommunity = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
+            if (name.trim().length < 1) {
+                messageDispatch("name cannot be empty");
+                return;
+            }
+            if (name.trim().length > 20) {
+                messageDispatch("name cannot be longer than 20 characters");
+                return;
+            }
+            if (name.indexOf(" ") !== -1) {
+                messageDispatch("name cannot contain spaces");
+                return;
+            }
+            if (description.trim().length < 1) {
+                messageDispatch("description cannot be empty");
+                return;
+            }
             const res = await post("c/create", {
                 name,
                 description,
