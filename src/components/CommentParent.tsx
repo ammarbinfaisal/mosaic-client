@@ -44,7 +44,7 @@ const CommentParent = ({ comment }: any) => {
                             <span className="text-md font-bold inline mx-2">
                                 by
                             </span>
-                            <Link href={`/u/${post.user}`} className="inline">
+                            <Link href={`/u/${postuser.username}`} className="inline">
                                 <div className="flex flex-row w-full justify-center items-center">
                                     <Image
                                         src={dp(postuser?.display_pic)}
