@@ -22,6 +22,8 @@ export default function Home() {
         const fn = () => {
             if (window.innerWidth > mdwidth) {
                 setLeftBox(true);
+            } else {
+                setLeftBox(false);
             }
         };
         fn();
