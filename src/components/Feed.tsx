@@ -4,8 +4,18 @@ import { fetcher, useGet } from "@/hooks/useApi";
 import useSWR from "swr";
 import { Sort } from "@/types/sort";
 
-const Feed = ({ sort }: any) => {
-    const { data: posts } = useSWR("me/feed", fetcher(1000 * 60 * 5));
+const Feed = ({ sort, home }: any) => {
+    const { data: h } = useSWR("me/feed", fetcher(1000 * 60 * 5));
+    const { data: trending } = useSWR("trending", fetcher(1000 * 60 * 5));
+    const [posts, setPosts] = useState<any>([]);
+
+    useEffect(() => {
+        if (home) {
+            setPosts(h);
+        } else {
+            setPosts(trending);
+        }
+    }, [h, home, trending]);
 
     return (
         <div className="w-full">

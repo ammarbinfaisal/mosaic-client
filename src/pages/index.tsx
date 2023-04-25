@@ -9,6 +9,7 @@ import { useState } from "react";
 
 export default function Home() {
     const [sort, setSort] = useState<Sort>(Sort.hot);
+    const [home, setHome] = useState<boolean>(true);
 
     return (
         <>
@@ -20,10 +21,10 @@ export default function Home() {
                     <Navbar search />
                     <div className="flex flex-row flex-grow w-full">
                         <div className="flex flex-col items-center justify-center h-full mx-8 my-12">
-                            <LeftBox sort={sort} setSort={setSort} />
+                            <LeftBox setSort={setSort} setHome={setHome} home={home} />
                         </div>
                         <div className="flex-grow flex flex-col items-center justify-center h-full">
-                            <Feed sort={sort} />
+                            <Feed sort={sort} home={home} />
                         </div>
                     </div>
                 </Main>

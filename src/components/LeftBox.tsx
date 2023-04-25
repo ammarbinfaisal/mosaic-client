@@ -2,7 +2,7 @@ import { Sort } from "@/types/sort";
 import Image from "next/image";
 import Link from "next/link";
 
-const LeftBox = ({ sort, setSort }: any) => {
+const LeftBox = ({ setSort, setHome, home }: any) => {
     const handleSort =
         (s: Sort) => (e: React.ChangeEvent<HTMLInputElement>) => {
             if (e.target.checked) setSort(s);
@@ -12,8 +12,8 @@ const LeftBox = ({ sort, setSort }: any) => {
     return (
         <div className="flex flex-col items-start justify-start">
             <div className="flex flex-col items-start justify-center w-full h-full">
-                <a
-                    href="#"
+                <button
+                    onClick={() => setHome(true)}
                     className="w-full h-full flex items-center justify-start"
                 >
                     <Image
@@ -24,9 +24,9 @@ const LeftBox = ({ sort, setSort }: any) => {
                         className="inline mr-2"
                     />
                     <span className="inline">home</span>
-                </a>
-                <a
-                    href="#"
+                </button>
+                <button
+                    onClick={() => setHome(false)}
                     className="w-full h-full flex items-center justify-start"
                 >
                     <Image
@@ -37,7 +37,7 @@ const LeftBox = ({ sort, setSort }: any) => {
                         className="inline mr-2"
                     />
                     <span className="inline">trending</span>
-                </a>
+                </button>
             </div>
             <div className="w-full h-full my-12 border-t-2 border-b-2 border-stone-400 flex flex-col">
                 <h3 className="text-xl font-bold">sort</h3>
