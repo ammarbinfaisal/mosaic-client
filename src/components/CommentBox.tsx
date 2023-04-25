@@ -43,18 +43,44 @@ const CommentBox = ({ post_id, comment_id }: CommentBoxProps) => {
             });
     };
 
+    const completeComment = (e: React.FormEvent<HTMLButtonElement>) => {
+        e.preventDefault();
+        const htmlNode = document.createElement("div");
+        htmlNode.innerHTML = comment;
+        const content = htmlNode.innerText;
+        console.log(content);
+        const body : any = {
+            content,
+            post: post_id,
+        };
+        if (comment_id) body.parent = comment_id;
+        post("cm/completion", body).then(async (res) => {
+            setComment(comment + res.data.completion);
+        }).catch((err) => {
+            console.log(err);
+            msgDispatch("comment failed");
+        });
+    }
+
+
     if (!isLoggedIn) return null;
     if (!mounted) return null;
 
     return (
         <form className="w-full my-8" onSubmit={submitComment}>
             <Editor content={comment} setContent={setComment} />
-            <div className="flex justify-end items-end">
+            <div className="flex justify-center items-center">
                 <button
                     type="submit"
-                    className="ml-full mr-0 my-0 px-4 py-2 bg-rose-800 text-white rounded"
+                    className="mr-2 my-0 px-4 py-2 bg-rose-800 text-white rounded"
                 >
                     comment
+                </button>
+                <button
+                    onClick={completeComment}
+                    className="ml-2 my-0 px-4 py-2 bg-rose-800 text-white rounded"
+                >
+                    complete
                 </button>
             </div>
         </form>
