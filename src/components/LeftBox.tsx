@@ -23,7 +23,13 @@ const LeftBox = ({ setSort, setHome, home }: any) => {
                         alt="home"
                         className="inline mr-2"
                     />
-                    <span className="inline">home</span>
+                    <span
+                        className={`inline ${
+                            home ? "font-bold underline" : ""
+                        }`}
+                    >
+                        home
+                    </span>
                 </button>
                 <button
                     onClick={() => setHome(false)}
@@ -33,10 +39,16 @@ const LeftBox = ({ setSort, setHome, home }: any) => {
                         src="/trending@2x.png"
                         width={20}
                         height={20}
-                        alt="popular"
                         className="inline mr-2"
+                        alt="trending"
                     />
-                    <span className="inline">trending</span>
+                    <span
+                        className={`inline ${
+                            !home ? "font-bold underline" : ""
+                        }`}
+                    >
+                        trending
+                    </span>
                 </button>
             </div>
             <div className="w-full h-full my-12 border-t-2 border-b-2 border-stone-400 flex flex-col">
