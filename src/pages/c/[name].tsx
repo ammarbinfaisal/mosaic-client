@@ -103,7 +103,7 @@ const CommunityPage = ({ posts, pages, community }: Props) => {
                     </span>
                 </div>
                 {postss.map((post: any) => (
-                    <div key={post.id} className="my-4 p-4 bg-gray-200 rounded">
+                    <div key={post.id} className="my-4 p-4 bg-gray-100 rounded">
                         <Link href={`/p/${post.id}`}>
                             <h1 className="text-xl font-bold">{post.title}</h1>
                         </Link>
