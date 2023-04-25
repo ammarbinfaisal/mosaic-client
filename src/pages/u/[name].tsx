@@ -6,15 +6,17 @@ import { useMemo, useState } from "react";
 import Head from "next/head";
 import CommentParent from "@/components/CommentParent";
 import dp from "@/utils/dp";
+import Navbar from "@/components/Navbar";
 
 const User = ({ user, posts, comments }: any) => {
     const [showPosts, setShowPosts] = useState(true);
     return (
-        <div>
+        <>
             <Head>
                 <title>{user.username}</title>
             </Head>
             <Main>
+            <Navbar/>
                 <div className="flex flex-col items-center justify-center">
                     <Image
                         src={dp(user.display_pic)}
@@ -71,7 +73,7 @@ const User = ({ user, posts, comments }: any) => {
                     ))}
                 </div>
             </Main>
-        </div>
+        </>
     );
 };
 
