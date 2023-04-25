@@ -152,6 +152,7 @@ const Post = ({ post, user, community, comments }: PostProps) => {
                             key={comment.id}
                             comment={comment}
                             post_id={post.id}
+                            isPage
                         />
                     ))}
                 </div>
