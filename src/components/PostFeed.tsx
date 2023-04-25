@@ -68,7 +68,7 @@ const PostFeed = ({ post: feedPost }: { post: any }) => {
                 <span className="cursor-pointer group" onClick={upvote}>
                     <FontAwesomeIcon
                         icon={faCaretUp}
-                        size="lg"
+                        size="xl"
                         className={`group-hover:text-rose-400 ${
                             v?.vote === 1 ? "text-rose-600" : ""
                         }`}
@@ -78,14 +78,14 @@ const PostFeed = ({ post: feedPost }: { post: any }) => {
                 <span className="cursor-pointer group" onClick={downvote}>
                     <FontAwesomeIcon
                         icon={faCaretDown}
-                        size="lg"
+                        size="xl"
                         className={`group-hover:text-rose-400 ${
                             v?.vote === -1 ? "text-rose-600" : ""
                         }`}
                     />
                 </span>
             </div>
-            <div>
+            <div className="w-full">
                 <span>{user?.username} in</span>
                 <Link href={`/c/${community?.name}`} className="ml-2">
                     c/{community?.name}
@@ -95,8 +95,9 @@ const PostFeed = ({ post: feedPost }: { post: any }) => {
                     {ago(new Date(post.time_created))} ago
                 </span>
                 <Link href={`/p/${post.id}`}>
-                    <h1 className="text-xl font-bold">{post.title}</h1>
+                    <h1 className="text-3xl font-bold">{post.title}</h1>
                 </Link>
+                <hr className="mb-4 bg-transparent w-full" />
                 <p
                     className="text-gray-500 break-words"
                     dangerouslySetInnerHTML={{
