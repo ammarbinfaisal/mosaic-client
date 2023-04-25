@@ -75,7 +75,7 @@ const Login = () => {
                         />
 
                         <button
-                            className="w-full px-4 py-2 bg-gray-100 rounded-md hover:bg-stome-900 hover:text-gray-100 transition-all"
+                            className="w-full px-4 py-2 bg-gray-100 rounded-md hover:bg-amber-900 hover:text-gray-100 transition-all"
                             type="submit"
                         >
                             Login
