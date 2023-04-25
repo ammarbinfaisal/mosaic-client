@@ -95,7 +95,7 @@ const PostFeed = ({ post: feedPost }: { post: any }) => {
                     {ago(new Date(post.time_created))} ago
                 </span>
                 <Link href={`/p/${post.id}`}>
-                    <h1 className="text-3xl font-bold">{post.title}</h1>
+                    <h1 className="text-2xl md:text-3xl font-bold">{post.title}</h1>
                 </Link>
                 <hr className="mb-4 bg-transparent w-full" />
                 <p

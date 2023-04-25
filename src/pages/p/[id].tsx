@@ -115,7 +115,7 @@ const Post = ({ post, user, community, comments }: PostProps) => {
                                         }`}
                                     />
                                 </span>
-                                <span className="text-2xl font-bold text-gray-500">
+                                <span className="text-xl md:text-2xl font-bold text-gray-500">
                                     {poststate.upvotes - poststate.downvotes}
                                 </span>
                                 <span
@@ -133,7 +133,7 @@ const Post = ({ post, user, community, comments }: PostProps) => {
                             </div>
                         </div>
                         <div className="w-full">
-                            <h1 className="text-3xl font-bold my-4">
+                            <h1 className="text-2xl md:text-3xl font-bold my-4">
                                 {poststate.title}
                             </h1>
                             <p

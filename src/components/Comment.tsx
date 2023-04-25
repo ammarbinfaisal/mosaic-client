@@ -109,7 +109,7 @@ const Comment = ({ comment, post_id, isPage, depth }: any) => {
                             }`}
                         />
                     </span>
-                    <span className="text-xl font-bold text-gray-500">
+                    <span className="text-lg md:text-xl font-bold text-gray-500">
                         {cm.upvotes - cm.downvotes}
                     </span>
                     <span className="cursor-pointer group" onClick={downvote}>

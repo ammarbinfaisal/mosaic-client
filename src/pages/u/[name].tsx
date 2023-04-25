@@ -25,7 +25,7 @@ const User = ({ user, posts, comments }: any) => {
                         alt="dp"
                         className="rounded-full"
                     />
-                    <h1 className="text-2xl font-bold">{user.username}</h1>
+                    <h1 className="text-xl md:text-2xl font-bold">{user.username}</h1>
                     <p className="text-gray-500">{user.bio}</p>
                 </div>
                 <div className="flex items-center justify-center my-4">
@@ -53,7 +53,7 @@ const User = ({ user, posts, comments }: any) => {
                         showPosts ? "" : "hidden"
                     }`}
                 >
-                    <h1 className="text-2xl font-bold">Posts</h1>
+                    <h1 className="text-xl md:text-2xl font-bold">Posts</h1>
                     {posts.map((post: any) => (
                         <PostFeed key={post.id} post={post} />
                     ))}
@@ -63,7 +63,7 @@ const User = ({ user, posts, comments }: any) => {
                         !showPosts ? "" : "hidden"
                     }`}
                 >
-                    <h1 className="text-2xl font-bold">Comments</h1>
+                    <h1 className="text-xl md:text-2xl font-bold">Comments</h1>
                     {comments.map((comment: any) => (
                         <CommentParent
                             key={comment.id}

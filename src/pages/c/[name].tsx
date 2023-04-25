@@ -87,16 +87,16 @@ const CommunityPage = ({ posts, pages, community }: Props) => {
             </Head>
             <Navbar search />
             <div className="flex flex-col w-full px-4 mx-auto my-12">
-                <h1 className="text-3xl font-bold">c/{name}</h1>
+                <h1 className="text-2xl md:text-3xl font-bold">c/{name}</h1>
                 <div className="flex my-8 md:w-1/2 mx-auto">
                     <Link
                         href={`/p/create?community=${community.id}`}
-                        className="text-rose-700 my-4 mx-auto text-bold text-xl"
+                        className="text-rose-700 my-4 mx-auto text-bold text-lg md:text-xl"
                     >
                         create post
                     </Link>
                     <span
-                        className="text-rose-700 my-4 mx-auto text-bold text-xl cursor-pointer"
+                        className="text-rose-700 my-4 mx-auto text-bold text-lg md:text-xl cursor-pointer"
                         onClick={hasJoined ? leave : join}
                     >
                         {hasJoined ? "leave" : "join"}

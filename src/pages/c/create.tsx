@@ -44,7 +44,7 @@ export default function NewCommunity() {
                 <Main>
                     <Navbar />
                     <form className="flex flex-col max-w-3xl w-full mx-auto" onSubmit={createCommunity}>
-                        <h1 className="text-3xl font-bold my-4">
+                        <h1 className="text-2xl md:text-3xl font-bold my-4">
                             create a community
                         </h1>
                         <input

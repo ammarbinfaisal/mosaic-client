@@ -52,7 +52,7 @@ const LeftBox = ({ setSort, setHome, home }: any) => {
                 </button>
             </div>
             <div className="w-full h-full my-12 border-t-2 border-b-2 border-stone-400 flex flex-col">
-                <h3 className="text-xl font-bold">sort</h3>
+                <h3 className="text-lg md:text-xl font-bold">sort</h3>
                 <span className="flex">
                     <input
                         type="radio"

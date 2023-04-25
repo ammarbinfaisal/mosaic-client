@@ -56,7 +56,7 @@ export default function Home() {
                 >
                     <FontAwesomeIcon
                         icon={faNavicon}
-                        className="text-2xl fixed bottom-4 right-4"
+                        className="text-xl md:text-2xl fixed bottom-4 right-4"
                         color="black"
                     />
                 </div>

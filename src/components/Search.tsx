@@ -58,7 +58,7 @@ const Search = () => {
                 className="mx-auto w-full text-gray-700 placeholder-gray-400 rounded-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-gray-600 focus:border-transparent border-2 border-stone-400 text-lg bg-stone-100"
             />
             {search.length > 0 && (
-                <div className="absolute bg-gray-100 rounded-lg shadow-lg overflow-hidden max-h-96 top-16 w-full">
+                <div className="absolute bg-gray-100 rounded-lg shadow-lg overflow-hidden max-h-96 top-16 w-full z-50">
                     <div className="flex flex-col items-start justify-between px-4 py-2">
                         <h2 className="text-gray-900 font-semibold">Users</h2>
                         {results?.users?.length

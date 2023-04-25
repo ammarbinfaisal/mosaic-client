@@ -22,9 +22,9 @@ const Navbar = (props: INavbarProps) => {
 
     return (
         <div className="flex flex-col w-full justify-center items-center">
-            <nav className="grid grid-cols-6 grid-rows-1 md:px-12 w-full">
+            <nav className="grid grid-cols-7 grid-rows-1 md:px-12 w-full">
                 <Link
-                    className="flex flex-row items-center text-white col-start-1 col-end-2"
+                    className="flex flex-row items-center text-white col-start-1 col-end-3"
                     href="/"
                 >
                     <Image
@@ -33,16 +33,16 @@ const Navbar = (props: INavbarProps) => {
                         height={50}
                         alt="mosaic"
                     />
-                    <span className="font-semibold text-xl tracking-tight text-stone-900 text-3xl hidden md:inline-block">
+                    <span className="font-semibold text-lg md:text-xl tracking-tight text-stone-900 text-2xl md:text-3xl hidden md:inline-block">
                         Mosaic
                     </span>
                 </Link>
                 {props.search && (
-                    <div className="w-full max-w-full flex justify-center col-span-4 md:col-span-3">
+                    <div className="w-full max-w-full flex justify-center col-span-5">
                         <Search />
                     </div>
                 )}
-                <div className="self-end flex justify-center items-center col-start-6 col-end-7 md:col-start-5 md:col-end-7">
+                <div className="self-end flex justify-center items-center col-start-6 col-start-8">
                     <Link
                         href="/u/me"
                         className="flex justify-center items-center text-md px-4 py-2 leading-none text-stone-900 hover:text-gray-800"

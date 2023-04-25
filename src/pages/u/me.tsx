@@ -71,13 +71,13 @@ const Me = () => {
                         height={100}
                         alt="logo"
                     />
-                    <h1 className="text-3xl font-bold">{user?.username}</h1>
+                    <h1 className="text-2xl md:text-3xl font-bold">{user?.username}</h1>
                 </div>
                 <form
                     className="grid grid-cols-4 gap-4 my-12"
                     onSubmit={update}
                 >
-                    <h2 className="col-span-4 text-xl font-bold">
+                    <h2 className="col-span-4 text-lg md:text-xl font-bold">
                         Update Profile
                     </h2>
                     <label htmlFor="old_password">Old Password</label>

@@ -84,7 +84,7 @@ const Login = () => {
                     </form>
                     <Link
                         href="/register"
-                        className="text-stone-900 hover:text-stone-800 hover:underline font-semibold text-xl my-12"
+                        className="text-stone-900 hover:text-stone-800 hover:underline font-semibold text-lg md:text-xl my-12"
                     >
                         Don&apos;t have an account? Register here
                     </Link>

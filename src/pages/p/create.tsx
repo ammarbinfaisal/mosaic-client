@@ -93,10 +93,10 @@ const NewPost = () => {
                     </form>
                 ) : (
                     <div className="flex flex-col justify-center items-center max-w-3xl w-full mx-auto">
-                        <p className="text-2xl">
+                        <p className="text-xl md:text-2xl">
                             you are not in any communities
                         </p>
-                        <p className="text-xl">
+                        <p className="text-lg md:text-xl">
                             join a communityId to create a post
                         </p>
                     </div>

@@ -37,7 +37,7 @@ const CommentParent = ({ comment }: any) => {
             <div className="flex flex-col w-full items-center">
                 {post && (
                     <div className="w-full">
-                        <h2 className="text-2xl font-bold block">
+                        <h2 className="text-xl md:text-2xl font-bold block">
                             {post.title}
                         </h2>
                         <div className="flex justify-start items-center">

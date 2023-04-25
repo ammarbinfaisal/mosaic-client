@@ -42,7 +42,7 @@ const Auth = (props: IAuthProps) => {
     if (error && error instanceof TypeError) {
         return (
             <div className="flex flex-col items-center justify-center h-screen">
-                <h1 className="text-3xl font-bold">
+                <h1 className="text-2xl md:text-3xl font-bold">
                     You seem to be offline :/
                 </h1>
             </div>
@@ -52,14 +52,14 @@ const Auth = (props: IAuthProps) => {
     if (isLoading) {
         return (
             <div className="flex flex-col items-center justify-center h-screen">
-                <h1 className="text-3xl font-bold">loading...</h1>
+                <h1 className="text-2xl md:text-3xl font-bold">loading...</h1>
             </div>
         );
     }
 
     return (
         <div className="flex flex-col items-center justify-center h-screen">
-            <h1 className="text-3xl font-bold">Redirecting to login page...</h1>
+            <h1 className="text-2xl md:text-3xl font-bold">Redirecting to login page...</h1>
         </div>
     );
 };
