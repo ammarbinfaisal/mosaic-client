@@ -93,14 +93,14 @@ const PostFeed = ({ post: feedPost }: { post: any }) => {
                 <span>
                     {user?.username} in
                 </span>
-                    <Link href={`c/${community?.name}`}>
+                    <Link href={`/c/${community?.name}`} className="ml-2">
                         c/{community?.name}
                     </Link>
                 <span className="text-gray-500"> · </span>
                 <span className="text-gray-500">
                     {ago(new Date(post.time_created))} ago
                 </span>
-                <Link href={`p/${post.id}`}>
+                <Link href={`/p/${post.id}`}>
                     <h1 className="text-xl font-bold">{post.title}</h1>
                 </Link>
                 <p

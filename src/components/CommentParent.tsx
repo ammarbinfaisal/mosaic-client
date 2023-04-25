@@ -47,16 +47,14 @@ const CommentParent = ({ comment }: any) => {
                             <Link href={`/u/${post.user}`} className="inline">
                                 <div className="flex flex-row w-full justify-center items-center">
                                     <Image
-                                        src={
-                                            postuser?.display_pic ||
-                                            "/usr_profile_pic.svg"
-                                        }
+                                        src={dp(postuser?.display_pic)}
                                         width={40}
                                         height={40}
+                                        className="rounded-full mr-2"
                                         alt="dp"
                                     />
                                     <h2 className="font-bold">
-                                        {postuser?.username}
+                                        u/{postuser?.username}
                                     </h2>
                                 </div>
                             </Link>
@@ -67,13 +65,17 @@ const CommentParent = ({ comment }: any) => {
                 <div className="flex flex-col w-full bg-gray-200 p-4 rounded">
                     <div className="flex flex-row w-full items-center">
                         <Image
-                            className="inline"
+                            className="inline rounded-full mr-2"
                             src={dp(user?.display_pic)}
                             width={40}
                             height={40}
                             alt="dp"
                         />
-                        <h2 className="text-lg font-bold">{user?.username}</h2>
+                        <h2 className="text-lg font-bold">
+                            <Link href={`/u/${user?.username}`}>
+                                u/{user?.username}
+                            </Link>
+                        </h2>
                     </div>
                     <div
                         className={`flex flex-col w-auto ml-5 mt-1 pl-2 border-l-2 border-gray-500`}
