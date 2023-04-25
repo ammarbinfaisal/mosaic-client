@@ -99,7 +99,7 @@ const Comment = ({ comment, post_id, isPage, depth }: any) => {
     return (
         <div className="flex w-full mt-4 h-full bg-gray-100">
             <div className="flex flex-col items-center justify-start w-12 mr-4 bg-gray-200">
-                <div className="flex flex-col items-center justify-center min-h-24 my-4 h-full">
+                <div className="flex flex-col items-center justify-center max-h-24 my-4 h-full">
                     <span className="cursor-pointer group" onClick={upvote}>
                         <FontAwesomeIcon
                             size="lg"
@@ -121,19 +121,6 @@ const Comment = ({ comment, post_id, isPage, depth }: any) => {
                             }`}
                         />
                     </span>
-                    <FontAwesomeIcon
-                        icon={expanded ? faMinimize : faMaximize}
-                        className={`text-gray-500 mt-4 cursor-pointer ${
-                            width < 768 && depth > 3 ? "hidden" : ""
-                        }`}
-                        onClick={toggleComment}
-                    />
-                    <Link href={`/cm/${comment.id}`}>
-                        <FontAwesomeIcon
-                            icon={faUpRightFromSquare}
-                            className="text-gray-500 mt-4 cursor-pointer"
-                        />
-                    </Link>
                 </div>
             </div>
             <div className="flex flex-col w-full">
@@ -181,6 +168,26 @@ const Comment = ({ comment, post_id, isPage, depth }: any) => {
                         >
                             replies - {replies?.length}
                         </span>
+                        <span className="text-md text-gray-500 cursor-pointer mx-4">
+                            <FontAwesomeIcon
+                                icon={expanded ? faMinimize : faMaximize}
+                                className={`text-gray-500 cursor-pointer ${
+                                    width < 768 && depth > 3 ? "hidden" : ""
+                                }`}
+                                onClick={toggleComment}
+                                title="expand"
+                            />
+                        </span>
+                        <Link
+                            href={`/cm/${comment.id}`}
+                            className="text-md text-gray-500 cursor-pointer mx-4"
+                        >
+                            <FontAwesomeIcon
+                                icon={faUpRightFromSquare}
+                                className="text-gray-500 cursor-pointer"
+                                title="open in new tab"
+                            />
+                        </Link>
                     </div>
                     <div className="flex flex-col w-full">
                         {commentBox && isLoggedIn && (
