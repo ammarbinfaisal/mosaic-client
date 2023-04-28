@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import { useRouter } from "next/router";
 import consts from "@/consts";
 import Head from "next/head";
@@ -92,6 +92,7 @@ const Register = () => {
                             Register
                         </button>
                     </form>
+                    {error && <p className="mt-4 text-red-800">{error}</p>}
                 </div>
                 <div className="w-full row-span-1 flex justify-center relative">
                     <img

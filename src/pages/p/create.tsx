@@ -38,7 +38,7 @@ const NewPost = () => {
             const htmlNode = document.createElement("div");
             htmlNode.innerHTML = content;
             const cont = htmlNode.innerText;
-            if (cont.trim().length < 1) {
+            if (!(htmlNode.querySelectorAll("img").length) && cont.trim().length < 1) {
                 msgDispatch("post cannot be empty");
                 return;
             }

@@ -5,10 +5,12 @@ import Main from "@/components/Main";
 import Navbar from "@/components/Navbar";
 
 const CommentPage = ({ comment }: any) => {
-    const htmlNode = document.createElement("div");
-    htmlNode.innerHTML = comment.content;
-    const title = htmlNode.textContent?.slice(0, 50) || "";
-
+    let title = "No Comment"
+    if (typeof document !== "undefined") {
+        const htmlNode = document.createElement("div");
+        htmlNode.innerHTML = comment.content;
+        title = htmlNode.textContent?.slice(0, 50) || "";
+    }
     return (
         <>
             <Head>
@@ -21,6 +23,7 @@ const CommentPage = ({ comment }: any) => {
             </Main>
         </>
     );
+    
 };
 
 export const getServerSideProps = async (context: any) => {
