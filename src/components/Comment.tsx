@@ -22,7 +22,7 @@ const CommentBox = dynamic(() => import("@/components/CommentBox"), {
     ssr: false,
 });
 
-const Comment = ({ comment, post_id, isPage, depth }: any) => {
+const Comment = ({ comment, isPage, depth }: any) => {
     const { isLoggedIn } = useAuth();
     const [cm, setCm] = useState(comment);
     const { width } = useWindowSize();
@@ -45,6 +45,7 @@ const Comment = ({ comment, post_id, isPage, depth }: any) => {
     const [expanded, setExpanded] = useState(depth < 4);
     const [mounted, setMounted] = useState(false);
     const p = usePost();
+    const post_id = comment?.post ;
 
     const upvote = async () => {
         p(`cm/${comment.id}/upvote`, {})
@@ -97,6 +98,7 @@ const Comment = ({ comment, post_id, isPage, depth }: any) => {
     }, [upvotes, downvotes]);
 
     return (
+        <> {isPage ? <Link href={`/p/${post_id}`}>Go to post</Link> : null}
         <div className="flex w-full mt-4 h-full bg-gray-100">
             <div className="flex flex-col items-center justify-start w-12 mr-4 bg-gray-200">
                 <div className="flex flex-col items-center justify-center max-h-24 my-4 h-full">
@@ -205,8 +207,6 @@ const Comment = ({ comment, post_id, isPage, depth }: any) => {
                                 <Comment
                                     key={reply.id}
                                     comment={reply}
-                                    post_id={post_id}
-                                    isPage={isPage}
                                     depth={depth + 1}
                                 />
                             ))}
@@ -214,6 +214,7 @@ const Comment = ({ comment, post_id, isPage, depth }: any) => {
                 </div>
             </div>
         </div>
+        </>
     );
 };
 

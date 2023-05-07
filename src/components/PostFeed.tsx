@@ -101,7 +101,7 @@ const PostFeed = ({ post: feedPost }: { post: any }) => {
                 </Link>
                 <hr className="mb-4 bg-transparent w-full" />
                 <p
-                    className="text-gray-500 break-words"
+                    className="text-gray-500 post-content"
                     dangerouslySetInnerHTML={{
                         __html: sanitize(post.content),
                     }}

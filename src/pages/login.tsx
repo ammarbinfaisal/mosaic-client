@@ -44,7 +44,7 @@ const Login = () => {
             <Head>
                 <title>Mosaic Login</title>
             </Head>
-            <div className="h-screen w-screen grid grid-row-3 grid-cols-1 bg-light">
+            <div className="h-screen w-screen overflow-x-hidden grid grid-row-3 grid-cols-1 bg-light">
                 <div className="flex flex-col items-center justify-center w-full row-span-2">
                     <Image
                         src="/logo@2x.png"
@@ -54,7 +54,7 @@ const Login = () => {
                     />
                     <h1 className="text-4xl font-bold">Mosaic</h1>
                     <form
-                        className="flex flex-col items-center justify-center w-full max-w-md mt-8 space-y-4"
+                        className="flex flex-col items-center justify-center w-full max-w-xs md:max-w-sm mt-8 space-y-4"
                         onSubmit={handleSubmit}
                     >
                         <input

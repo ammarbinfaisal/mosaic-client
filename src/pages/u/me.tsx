@@ -9,6 +9,7 @@ import consts from "@/consts";
 import { MsgDispatchContext } from "@/context/message";
 import dp from "@/utils/dp";
 import Head from "next/head";
+import Navbar from "@/components/Navbar";
 
 const Me = () => {
     const [oldPassword, setOldPassword] = useState("");
@@ -63,9 +64,11 @@ const Me = () => {
             <Head>
                 <title>me</title>
             </Head>
+
             <Main>
+                <Navbar />
                 <div className="flex flex-col items-center justify-center">
-                    <Image
+                    <Image className="rounded-full"
                         src={dp(user?.display_pic)}
                         width={100}
                         height={100}

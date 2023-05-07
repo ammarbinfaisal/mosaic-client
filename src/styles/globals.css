@@ -17,3 +17,8 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+.post-content * {
+    word-break: break-word;
+    
+}

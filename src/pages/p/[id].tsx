@@ -14,6 +14,9 @@ import sanitize from "@/utils/sanitize";
 import CommentBox from "@/components/CommentBox";
 import Comment from "@/components/Comment";
 import dp from "@/utils/dp";
+import useAuth from "@/hooks/useAuth";
+import Button from "@/components/Button";
+import { useRouter } from "next/router";
 
 interface PostProps {
     post: any;
@@ -40,9 +43,10 @@ const Post = ({ post, user, community, comments }: PostProps) => {
     const { vote } = data || {};
     const [mounted, setMounted] = useState(false);
     const title = `${post.title} - ${community.name}`;
+    const router = useRouter();
 
     const p = usePost();
-
+    const auth = useAuth();
     const upvote = async () => {
         try {
             await p(`p/${post.id}/upvote`, {});
@@ -75,6 +79,17 @@ const Post = ({ post, user, community, comments }: PostProps) => {
         setMounted(true);
     }, []);
 
+    const deletePost = async () => {
+        try {
+            await p(`p/${post.id}/delete`, {});
+            router.push(`/`)
+        }
+        catch (e) {
+            console.log(e)
+        }
+    };
+
+
     return (
         <>
             <Head>
@@ -83,10 +98,11 @@ const Post = ({ post, user, community, comments }: PostProps) => {
             <Main>
                 <Navbar search />
                 <div className="my-4 py-4 px-2 rounded w-full flex-col">
-                    <Link
-                        className="text-gray-500 font-bold text-inherit flex items-center"
-                        href={`/u/${user?.username}`}
+                    <div
+                        className="text-gray-500 font-bold text-inherit flex justify-between items-center"
                     >
+                        <div>
+                        <Link  href={`/u/${user?.username}`}>
                         <Image
                             src={dp(user?.display_pic)}
                             alt="dp"
@@ -95,11 +111,16 @@ const Post = ({ post, user, community, comments }: PostProps) => {
                             className="rounded-full inline"
                         />
                         <span className="ml-4">u/{user?.username}</span>
+                        </Link>
                         <span className="mx-2 my-4">
                             {mounted ? ago(new Date(post.time_created)) : ""}{" "}
                             ago
                         </span>
-                    </Link>
+                        </div>
+    
+                        {auth.isLoggedIn && auth.user?.id === poststate.user ? (<button className="text-red-700 hover:text-red-900 hover:underline"  onClick={deletePost}>Delete Post</button>) : null}
+
+                    </div>
                     <div className="flex flex-row">
                         <div className="flex flex-col items-center justify-between mr-8 py-4">
                             <div className="flex flex-col items-center justify-between h-16">
@@ -152,7 +173,7 @@ const Post = ({ post, user, community, comments }: PostProps) => {
                             key={comment.id}
                             comment={comment}
                             post_id={post.id}
-                            isPage depth = {0}
+                            depth = {0}
                         />
                     ))}
                 </div>

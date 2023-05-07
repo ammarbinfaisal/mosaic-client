@@ -10,8 +10,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faNavicon } from "@fortawesome/free-solid-svg-icons";
 import useAuth from "@/hooks/useAuth";
 import useWindowSize from "@/hooks/useWindowSize";
+import consts from "@/consts";
 
-const mdwidth = 768;
 
 export default function Home() {
     const auth = useAuth();
@@ -31,10 +31,10 @@ export default function Home() {
             </Head>
             <Main>
                 <Navbar search />
-                <div className="flex flex-row flex-grow w-full">
+                <div className="flex flex-row flex-grow w-full overflow-x-hidden">
                     <div
                         className={`${
-                            width >= mdwidth || leftBox ? "w-1/2 md:w-auto" : "w-0 overflow-hidden"
+                            width >= consts.mdwidth || leftBox ? "w-1/2 md:w-auto" : "w-0 overflow-hidden"
                         } md:flex flex-col items-center justify-center h-full mx-0 md:mx-8 my-12 transition-all duration-500 ease-in-out`}
                     >
                         <LeftBox
@@ -45,7 +45,7 @@ export default function Home() {
                     </div>
                     <div
                         className={`flex-grow flex flex-col items-center justify-center h-full z-10 bg-white transition-all duration-500 ease-in-out
-                         ${width < mdwidth && leftBox ? "opacity-20" : "opacity-100"}`}
+                         ${width < consts.mdwidth && leftBox ? "opacity-20" : "opacity-100"}`}
                     >
                         <Feed sort={sort} home={home} />
                     </div>

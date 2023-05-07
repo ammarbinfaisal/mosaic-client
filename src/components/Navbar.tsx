@@ -4,21 +4,18 @@ import useAuth from "@/hooks/useAuth";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import dp from "@/utils/dp";
+import LoginLogout from "./LoginLogout";
+import useWindowSize from "@/hooks/useWindowSize";
+import consts from "@/consts";
 
 interface INavbarProps {
     search?: boolean;
 }
 
-const logOutInClass =
-    "hidden md:inline-block text-md px-4 py-2 leading-none border rounded text-stone-900 border-stone-400 hover:border-transparent hover:text-gray-900 hover:bg-stone-400";
 
 const Navbar = (props: INavbarProps) => {
     const auth = useAuth();
-
-    const logout = () => {
-        localStorage.removeItem("token");
-        auth.mutate?.();
-    };
+    const { width } = useWindowSize();
 
     return (
         <div className="flex flex-col w-full justify-center items-center">
@@ -56,15 +53,7 @@ const Navbar = (props: INavbarProps) => {
                         />
                         <span className="hidden md:inline">Profile</span>
                     </Link>
-                    {auth.isLoggedIn ? (
-                        <button className={logOutInClass} onClick={logout}>
-                            Logout
-                        </button>
-                    ) : (
-                        <Link href="/login" className={logOutInClass}>
-                            login
-                        </Link>
-                    )}
+                    {width > consts.mdwidth ? (<LoginLogout />) : (null)}
                 </div>
             </nav>
         </div>

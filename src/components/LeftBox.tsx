@@ -1,6 +1,9 @@
+import consts from "@/consts";
+import useWindowSize from "@/hooks/useWindowSize";
 import { Sort } from "@/types/sort";
 import Image from "next/image";
 import Link from "next/link";
+import LoginLogout from "./LoginLogout";
 
 const LeftBox = ({ setSort, setHome, home }: any) => {
     const handleSort =
@@ -8,6 +11,8 @@ const LeftBox = ({ setSort, setHome, home }: any) => {
             if (e.target.checked) setSort(s);
             else setSort(Sort.hot);
         };
+    const { width } = useWindowSize();
+
 
     return (
         <div className="flex flex-col items-start justify-start w-full">
@@ -116,7 +121,10 @@ const LeftBox = ({ setSort, setHome, home }: any) => {
                 >
                     new&nbsp;community
                 </Link>
+
             </div>
+            {width <= consts.mdwidth ? (<LoginLogout />) : (null)}
+
         </div>
     );
 };

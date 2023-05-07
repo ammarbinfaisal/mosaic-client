@@ -21,7 +21,7 @@
     "eslint-config-next": "13.3.0",
     "lru-cache": "^8.0.5",
     "minidenticons": "^3.1.2",
-    "next": "13.3.0",
+    "next": "^13.3.0",
     "postcss": "8.4.21",
     "quilljs-markdown": "^1.2.0",
     "react": "18.2.0",

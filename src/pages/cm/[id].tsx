@@ -19,7 +19,7 @@ const CommentPage = ({ comment }: any) => {
             <Main>
                 <Navbar search />
                 <hr className="my-4 bg-transparent" />
-                <Comment comment={comment} isPage depth={0} />
+                <Comment comment={comment}  isPage depth={0} />
             </Main>
         </>
     );
