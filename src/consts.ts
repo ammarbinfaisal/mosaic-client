@@ -1,5 +1,5 @@
 const consts = {
-    API_URL: "http://localhost:5000",
+    API_URL: process.env.APIURL || "http://localhost:5000",
     mdwidth: 768,
 };
 
